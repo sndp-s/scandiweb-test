@@ -5,7 +5,6 @@ export const Wrapper = styled.header`
   justify-content: space-between;
   align-items: center;
   height: 80px;
-  border: 1px solid red;
   position: relative;
 `;
 

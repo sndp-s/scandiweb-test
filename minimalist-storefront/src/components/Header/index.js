@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 
 // components
-import CurrencyDropdown from "../CurrencyDropdown";
 import {
   Wrapper,
   OptionsBar,
@@ -10,6 +9,7 @@ import {
   RightSideWrapper,
   Cart,
 } from "./Header.styles";
+import CurrencyDropdown from "../CurrencyDropdown";
 
 class Header extends Component {
   render() {
@@ -21,7 +21,7 @@ class Header extends Component {
           <Option>KIDS</Option>
         </OptionsBar>
         <Logo />
-        <RightSideWrapper>
+        <RightSideWrapper >
           <CurrencyDropdown />
           <Cart />
         </RightSideWrapper>

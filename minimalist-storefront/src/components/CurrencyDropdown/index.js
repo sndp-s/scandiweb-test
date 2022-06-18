@@ -11,7 +11,6 @@ import {
 } from "./CurrencyDropdown.styles";
 
 class CurrencyDropdown extends Component {
-  
   constructor(props) {
     super(props);
     this.state = {
@@ -20,13 +19,13 @@ class CurrencyDropdown extends Component {
       currencyIcon: "$",
     };
   }
-  
+
   validCurrencies = new Map([
     ["usd", "$"],
     ["eur", "€"],
     ["jpy", "¥"],
   ]);
-  
+
   renderCurrencyMenu = () => (
     <DropdownMenu>
       <MenuOption
@@ -67,11 +66,11 @@ class CurrencyDropdown extends Component {
     return (
       <Wrapper>
         <TopWrapper
-          onClick={() => {
+          onClick={() =>
             this.setState({
               dropdownClicked: !dropdownClicked,
-            });
-          }}
+            })
+          }
         >
           <CurrencyIcon>{currencyIcon}</CurrencyIcon>
           <DropdownIcon />
