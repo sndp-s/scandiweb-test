@@ -3,7 +3,7 @@ import React from "react";
 // components
 import Header from "./components/Header";
 import HomePage from "./pages/HomePage";
-import ProductPage from "./pages/ProductPage";
+import ProductDisplayPage from "./pages/ProductDisplayPage";
 import CartPage from "./pages/CartPage";
 
 // assets
@@ -15,8 +15,8 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <HomePage />
-      {/* <ProductPage/> */}
+      {/* <HomePage /> */}
+      <ProductDisplayPage/>
       {/* <CartPage/> */}
     </div>
   );

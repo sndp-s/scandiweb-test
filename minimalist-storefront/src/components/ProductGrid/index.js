@@ -8,7 +8,7 @@ class ProductGrid extends Component {
   render() {
     return (
       <Grid>
-        <SingleProductThumbnail />
+        <SingleProductThumbnail isInStock={false}/>
         <SingleProductThumbnail />
         <SingleProductThumbnail />
         <SingleProductThumbnail />

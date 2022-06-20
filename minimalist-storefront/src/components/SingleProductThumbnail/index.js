@@ -10,12 +10,15 @@ import {
 
 class SingleProductThumbnail extends Component {
   render() {
+    const { isInStock } = this.props;
     return (
       <>
         <Wrapper>
           <Image src="https://picsum.photos/200" alt="test" />
           <Name>Apollo Running Short</Name>
-          <Price>$<span className="nudge">50.00</span></Price>
+          <Price>
+            $<span className="nudge">50.00</span>
+          </Price>
         </Wrapper>
       </>
     );
