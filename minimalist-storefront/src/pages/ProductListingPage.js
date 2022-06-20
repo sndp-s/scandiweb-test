@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 // components
 import Title from "../components/Title";
+import ProductGrid from "../components/ProductGrid";
 
 // assets
 
@@ -10,7 +11,7 @@ class ProductListingPage extends Component {
     return (
       <main className="container">
         <Title text="Category name" />
-        {/* product grid */}
+        <ProductGrid />
       </main>
     );
   }
