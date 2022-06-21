@@ -5,11 +5,11 @@ import { Wrapper, Text } from "./Title.styles";
 
 class Title extends Component {
   render() {
-    const { text } = this.props;
+    const { text, pageStyle } = this.props;
     return (
       <>
-        <Wrapper>
-          <Text>{text}</Text>
+        <Wrapper pageStyle={pageStyle}>
+          <Text pageStyle={pageStyle}>{text}</Text>
         </Wrapper>
       </>
     );

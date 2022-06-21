@@ -10,7 +10,7 @@ class ProductListingPage extends Component {
   render() {
     return (
       <main className="container">
-        <Title text="Category name" />
+        <Title text="Category name" pageStyle="ProductListingPage"/>
         <ProductGrid />
       </main>
     );

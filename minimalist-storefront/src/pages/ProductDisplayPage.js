@@ -6,12 +6,15 @@ import ProductOptions from "../components/ProductOptions";
 
 class ProductDisplayPage extends Component {
   render() {
-    return(
-
-        <main className="container">
-            <ProductShowcase />
-            <ProductOptions />
-        </main>
+    const style = {
+      display: "flex",
+      padding: "80px 0 0 0",
+    };
+    return (
+      <main className="container" style={style}>
+        <ProductShowcase />
+        <ProductOptions />
+      </main>
     );
   }
 }

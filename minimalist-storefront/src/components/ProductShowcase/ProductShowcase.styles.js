@@ -2,15 +2,14 @@ import styled from "styled-components";
 
 export const Wrapper = styled.div`
   display: flex;
-  padding: 72px 5px 10px 5px;
-  border: 1px solid red;
+  padding: 5px;
+  margin-right: 50px;
 `;
 
 export const ImgList = styled.ul`
   display: flex;
   flex-direction: column;
-  border: 1px solid blue;
-  margin-right: 20px;
+  margin-right: 40px;
 `;
 
 export const ListItem = styled.li`
@@ -29,7 +28,4 @@ export const Image = styled.img`
 export const BigImgWrapper = styled.div`
   width: 610px;
   height: 510px;
-  margin-left: 20px;
-  margin-right: 50px;
-  border: 1px solid red;
 `;

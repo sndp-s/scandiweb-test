@@ -11,23 +11,26 @@ import {
 
 class ProductShowcase extends Component {
   render() {
+    const style = { display: "inline-block" };
     return (
-      <Wrapper>
-        <ImgList>
-          <ListItem>
-            <Image src="https://picsum.photos/80/80" />
-          </ListItem>
-          <ListItem>
-            <Image src="https://picsum.photos/80/80" />
-          </ListItem>
-          <ListItem>
-            <Image src="https://picsum.photos/80/80" />
-          </ListItem>
-        </ImgList>
-        <BigImgWrapper>
-          <Image src="https://picsum.photos/610/510" />
-        </BigImgWrapper>
-      </Wrapper>
+      <div style={style}>
+        <Wrapper>
+          <ImgList>
+            <ListItem>
+              <Image src="https://picsum.photos/80/80" />
+            </ListItem>
+            <ListItem>
+              <Image src="https://picsum.photos/80/80" />
+            </ListItem>
+            <ListItem>
+              <Image src="https://picsum.photos/80/80" />
+            </ListItem>
+          </ImgList>
+          <BigImgWrapper>
+            <Image src="https://picsum.photos/610/510" />
+          </BigImgWrapper>
+        </Wrapper>
+      </div>
     );
   }
 }
