@@ -5,6 +5,7 @@ import {
   Wrapper,
   OptionsBar,
   Option,
+  OptionLink,
   Logo,
   RightSideWrapper,
   Cart,
@@ -16,12 +17,20 @@ class Header extends Component {
     return (
       <Wrapper className="container">
         <OptionsBar>
-          <Option>WOMEN</Option>
-          <Option>MEN</Option>
-          <Option>KIDS</Option>
+          <Option>
+            <OptionLink href="#">WOMEN</OptionLink>
+          </Option>
+          <Option>
+            <OptionLink href="#">MEN</OptionLink>
+          </Option>
+          <Option>
+            <OptionLink href="#">KIDS</OptionLink>
+          </Option>
         </OptionsBar>
-        <Logo />
-        <RightSideWrapper >
+        <a href="/">
+          <Logo />
+        </a>
+        <RightSideWrapper>
           <CurrencyDropdown />
           <Cart />
         </RightSideWrapper>

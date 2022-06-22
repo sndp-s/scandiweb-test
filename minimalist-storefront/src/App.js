@@ -16,8 +16,8 @@ function App() {
     <div className="App">
       <Header />
       {/* <HomePage /> */}
-      <ProductDisplayPage/>
-      {/* <CartPage/> */}
+      {/* <ProductDisplayPage/> */}
+      {/* <CartPage /> */}
     </div>
   );
 }

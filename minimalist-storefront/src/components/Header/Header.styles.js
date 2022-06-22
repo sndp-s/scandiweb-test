@@ -14,18 +14,24 @@ export const OptionsBar = styled.ul`
 `;
 
 export const Option = styled.li`
-  font-size: 16px;
-  font-weight: 400;
-  color: #1d1f22;
   cursor: pointer;
   padding: 0 16px 30px 16px;
   border-bottom: 2px solid transparent;
 
   :hover {
     text-shadow: 0px 0px 0.9px #5ece7b, 0px 0px 0.9px #5ece7b;
-    color: #5ece7b;
     border-bottom: 2px solid #5ece7b;
   }
+  :hover > a {
+    color: #5ece7b;
+  }
+`;
+
+export const OptionLink = styled.a`
+  font-size: 16px;
+  font-weight: 400;
+  color: #1d1f22;
+  text-decoration: none;
 `;
 
 export const Logo = styled.div`
@@ -43,11 +49,14 @@ export const Logo = styled.div`
 
 export const RightSideWrapper = styled.div`
   display: flex;
-  align-items: baseline;
-  margin: 0 10px;
+  justify-content: space-between;
+  align-items: flex-end;
+  position: relative;
+  z-index: 100;
 `;
 
 export const Cart = styled.div`
+  margin: 18px;
   width: 30px;
   height: 20px;
   background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAHNSURBVHgBrVTbcdNAFD13JZsfHhoaQHTgDrK248Q/OBoqwBWQDkwqACoIaQAMH4wHhrCpAFNBlAoQ/CF59+auMs7Lj0ienJ/du+fuuY99APcM6u7u/QQ4vjA5bVAwnEzGKTZEaOHeBUxRKQfaL5w9lGkbG4KuG53ei1cEemuLf8+NMRk2wA1BrZMoaLo/spqiJpiRBTwb0m2iuzM4FTYF0QfUAiWyT4cLkYCxRGn9+PblCDXQ3R1EslmrhThwJ5KdFkSoAyYNYrMgaPPQ+DF88GgLtcAtEV0UNGacecJJ+qiIXi9pyRBbzE7U0ljEUyleoyKcclvS+9R8/zpdKqic+uwPpnIfpX8En4S0ahk/m2EaNJGFzccj3U/er9NqWEQOTktF+96mVY7b24MRK7xBlQSlXJfnbWMmKa1z9CUr9fQJ7sDx8cez+XylYL+fxAXzob/94ja2+d/h9ffd3dn7JLklMk0bSrXnP5RaJShiI2aOLflNrFXz4es55z8RH6jk5JkWtvyhsFZQGhNR+aaD32JJZnR54qSobEPDBWdQKmW64lYKKqYDcYwD506l6XB5cXna9r86YkLmyP2SDBOy7gBV0em8fLaOu31XzwFjdL5Oa+He1gAAAABJRU5ErkJggg==")

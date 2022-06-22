@@ -13,7 +13,7 @@ class ProductDisplayPage extends Component {
     return (
       <main className="container" style={style}>
         <ProductShowcase />
-        <ProductOptions />
+        <ProductOptions pageStyle="ProductDisplayPage" />
       </main>
     );
   }

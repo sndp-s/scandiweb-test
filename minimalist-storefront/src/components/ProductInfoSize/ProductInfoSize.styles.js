@@ -1,7 +1,25 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-export const SizeWrapper = styled.div`
+const ProductDisplayPageStyle_SizeWrapper = css`
   margin-bottom: 24px;
+`;
+const CartPageStyle_SizeWrapper = css`
+  margin-bottom: 16px;
+`;
+export const SizeWrapper = styled.div`
+  ${({ pageStyle }) => {
+    console.log(pageStyle);
+    switch (pageStyle) {
+      case "ProductDisplayPage":
+        return ProductDisplayPageStyle_SizeWrapper;
+      case "CartPage":
+        return CartPageStyle_SizeWrapper;
+      default:
+        return css`
+          margin-bottom: 20px;
+        `;
+    }
+  }};
 `;
 
 export const SizeLabel = styled.p`

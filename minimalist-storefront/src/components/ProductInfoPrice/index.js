@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 
 // components
-import { PriceWrapper, PriceLabel } from "./ProductInfo_Price.styles";
+import { PriceWrapper, PriceLabel } from "./ProductInfoPrice.styles";
 
-class ProductInfo_Price extends Component {
+class ProductInfoPrice extends Component {
   render() {
     return (
       <PriceWrapper>
@@ -15,4 +15,4 @@ class ProductInfo_Price extends Component {
   }
 }
 
-export default ProductInfo_Price;
+export default ProductInfoPrice;

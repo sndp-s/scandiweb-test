@@ -1,14 +1,14 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const Wrapper = styled.div`
   display: inline-block;
-  max-width: 115px;
-  position: relative;
+  max-width: 114px;
+  margin: 18px;
 `;
 
 export const TopWrapper = styled.div`
   display: flex;
-  margin-bottom: 15px;
+  align-items: flex-end;
   cursor: pointer;
 `;
 
@@ -25,13 +25,18 @@ export const DropdownIcon = styled.div`
     center no-repeat;
   align-self: flex-end;
   margin-bottom: 5px;
+  ${({ isOpen }) =>
+    isOpen &&
+    css`
+      transform: rotate(180deg);
+    `}
 `;
 
 export const DropdownMenu = styled.ul`
   width: 114px;
   position: absolute;
-  bottom: -1;
-  left: -16px;
+  top: 100%;
+  left: 0;
   box-shadow: 1px 1px 5px 1px rgba(1, 1, 1, 0.1);
 `;
 
@@ -40,6 +45,7 @@ export const MenuOption = styled.li`
   padding: 10px 20px;
   font-weight: 500;
   margin: 15px 0;
+  cursor: pointer;
 
   :hover {
     background: #eeeeee;
