@@ -8,9 +8,9 @@ import {
   OptionLink,
   Logo,
   RightSideWrapper,
-  Cart,
 } from "./Header.styles";
 import CurrencyDropdown from "../CurrencyDropdown";
+import CartDropdown from "../CartDropdown";
 
 class Header extends Component {
   render() {
@@ -32,7 +32,7 @@ class Header extends Component {
         </a>
         <RightSideWrapper>
           <CurrencyDropdown />
-          <Cart />
+          <CartDropdown pageStyle=""/>
         </RightSideWrapper>
       </Wrapper>
     );

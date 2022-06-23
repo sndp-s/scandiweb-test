@@ -20,13 +20,12 @@ class CurrencyDropdown extends Component {
     };
   }
 
-  // helpers
+  //////////////////////// helpers ////////////////////////
   validCurrencies = new Map([
     ["usd", "$"],
     ["eur", "€"],
     ["jpy", "¥"],
   ]);
-
   renderCurrencyMenu = () => (
     <DropdownMenu>
       <MenuOption
@@ -49,30 +48,28 @@ class CurrencyDropdown extends Component {
       </MenuOption>
     </DropdownMenu>
   );
-
-  handleDropDownClick = (event) => {
+  handleDropdownClick = (event) => {
     this.setState({
       dropdownClicked: !this.state.dropdownClicked,
     });
   };
-
   handleCurrencyOptionClick = (event) => {
     const currency = event.target.id;
     this.setCurrencyPref(currency);
   };
-
   setCurrencyPref = (currency) =>
     this.setState({
       dropdownClicked: false,
       currencyPref: currency,
       currencyIcon: this.validCurrencies.get(currency),
     });
+  /////////////////////////////////////////////////////////
 
   render() {
     const { dropdownClicked, currencyIcon } = this.state;
     return (
       <Wrapper>
-        <TopWrapper onClick={(event) => this.handleDropDownClick(event)}>
+        <TopWrapper onClick={(event) => this.handleDropdownClick(event)}>
           <CurrencyIcon>{currencyIcon}</CurrencyIcon>
           <DropdownIcon isOpen={dropdownClicked} />
         </TopWrapper>

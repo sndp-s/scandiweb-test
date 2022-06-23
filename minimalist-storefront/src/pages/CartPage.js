@@ -11,7 +11,7 @@ class CartPage extends Component {
         <Title text="CART" pageStyle="CartPage">
           CART
         </Title>
-        <CartList pageStyle="CartPage" />
+        <CartList pageStyle="CartPage"/>
       </main>
     );
   }

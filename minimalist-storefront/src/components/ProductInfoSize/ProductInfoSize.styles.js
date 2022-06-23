@@ -1,19 +1,24 @@
+/////////////////////////////////////////////////////////////////////////////////////////
 import styled, { css } from "styled-components";
-
+/////////////////////////////////////////////////////////////////////////////////////////
 const ProductDisplayPageStyle_SizeWrapper = css`
   margin-bottom: 24px;
 `;
 const CartPageStyle_SizeWrapper = css`
   margin-bottom: 16px;
 `;
+const CartDropdownStyle_SizeWrapper = css`
+  margin-bottom: 8px;
+`;
 export const SizeWrapper = styled.div`
   ${({ pageStyle }) => {
-    console.log(pageStyle);
     switch (pageStyle) {
       case "ProductDisplayPage":
         return ProductDisplayPageStyle_SizeWrapper;
       case "CartPage":
         return CartPageStyle_SizeWrapper;
+      case "CartDropdown":
+        return CartDropdownStyle_SizeWrapper;
       default:
         return css`
           margin-bottom: 20px;
@@ -21,8 +26,8 @@ export const SizeWrapper = styled.div`
     }
   }};
 `;
-
-export const SizeLabel = styled.p`
+/////////////////////////////////////////////////////////////////////////////////////////
+const BaseStyle_SizeLabel = css`
   font-size: 18px;
   font-family: "Roboto Condensed", sans-serif;
   font-weight: 700;
@@ -30,12 +35,29 @@ export const SizeLabel = styled.p`
   color: #1d1f22;
   margin-bottom: 8px;
 `;
-
+const CartDropdownStyle_SizeLabel = css`
+  ${BaseStyle_SizeLabel}
+  font-size: 14px;
+  line-height: 14px;
+  font-weight: 400;
+`;
+export const SizeLabel = styled.p`
+  ${({ pageStyle }) => {
+    switch (pageStyle) {
+      case "CartDropdown":
+        return CartDropdownStyle_SizeLabel;
+      default:
+        return BaseStyle_SizeLabel;
+    }
+  }}
+`;
+/////////////////////////////////////////////////////////////////////////////////////////
 export const SizeList = styled.ul`
   display: flex;
 `;
+/////////////////////////////////////////////////////////////////////////////////////////
 
-export const Size = styled.li`
+const BaseStyle_Size = css`
   /* box rules */
   border: 1px solid #1d1f22;
   background: #ffffff;
@@ -54,3 +76,27 @@ export const Size = styled.li`
     color: #ffffff;
   }
 `;
+const CartDropdownStyle_Size = css`
+  ${BaseStyle_Size}
+  /* box rules */
+  border: 1px solid #1d1f22;
+  background: #ffffff;
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+  /* text rules */
+  font-size: 14px;
+  line-height: 24px;
+  color: #1d1f22;
+`;
+export const Size = styled.li`
+  ${({ pageStyle }) => {
+    switch (pageStyle) {
+      case "CartDropdown":
+        return CartDropdownStyle_Size;
+      default:
+        return BaseStyle_Size;
+    }
+  }}
+`;
+/////////////////////////////////////////////////////////////////////////////////////////

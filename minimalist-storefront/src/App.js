@@ -15,9 +15,9 @@ function App() {
   return (
     <div className="App">
       <Header />
-      {/* <HomePage /> */}
-      {/* <ProductDisplayPage/> */}
-      {/* <CartPage /> */}
+      <CartPage />
+      <HomePage />
+      <ProductDisplayPage/>
     </div>
   );
 }

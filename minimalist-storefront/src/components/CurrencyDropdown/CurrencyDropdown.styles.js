@@ -1,23 +1,22 @@
+/////////////////////////////////////////////////////////////////////////////
 import styled, { css } from "styled-components";
-
+/////////////////////////////////////////////////////////////////////////////
 export const Wrapper = styled.div`
-  display: inline-block;
-  max-width: 114px;
   margin: 18px;
 `;
-
+/////////////////////////////////////////////////////////////////////////////
 export const TopWrapper = styled.div`
   display: flex;
   align-items: flex-end;
   cursor: pointer;
 `;
-
+/////////////////////////////////////////////////////////////////////////////
 export const CurrencyIcon = styled.span`
   font-size: 18px;
   font-weight: 500;
   margin-right: 10px;
 `;
-
+/////////////////////////////////////////////////////////////////////////////
 export const DropdownIcon = styled.div`
   width: 8px;
   height: 4px;
@@ -31,7 +30,7 @@ export const DropdownIcon = styled.div`
       transform: rotate(180deg);
     `}
 `;
-
+/////////////////////////////////////////////////////////////////////////////
 export const DropdownMenu = styled.ul`
   width: 114px;
   position: absolute;
@@ -39,7 +38,7 @@ export const DropdownMenu = styled.ul`
   left: 0;
   box-shadow: 1px 1px 5px 1px rgba(1, 1, 1, 0.1);
 `;
-
+/////////////////////////////////////////////////////////////////////////////=
 export const MenuOption = styled.li`
   font-size: 18px;
   padding: 10px 20px;
@@ -51,3 +50,4 @@ export const MenuOption = styled.li`
     background: #eeeeee;
   }
 `;
+/////////////////////////////////////////////////////////////////////////////

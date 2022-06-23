@@ -6,7 +6,6 @@ export const Wrapper = styled.div`
   padding: 16px;
   :hover {
     box-shadow: 1px 1px 30px 10px rgba(1, 1, 1, 0.1);
-    z-index: 10;
   }
   cursor: pointer;
 `;
