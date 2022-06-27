@@ -2,7 +2,7 @@
 import styled, { css } from "styled-components";
 /////////////////////////////////////////////////////////////////////////////
 export const Wrapper = styled.div`
-  margin: 18px;
+  margin: 25px;
 `;
 /////////////////////////////////////////////////////////////////////////////
 export const TopWrapper = styled.div`
@@ -12,7 +12,7 @@ export const TopWrapper = styled.div`
 `;
 /////////////////////////////////////////////////////////////////////////////
 export const CurrencyIcon = styled.span`
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 500;
   margin-right: 10px;
 `;
@@ -37,6 +37,7 @@ export const DropdownMenu = styled.ul`
   top: 100%;
   left: 0;
   box-shadow: 1px 1px 5px 1px rgba(1, 1, 1, 0.1);
+  background: #fff;
 `;
 /////////////////////////////////////////////////////////////////////////////=
 export const MenuOption = styled.li`
@@ -45,7 +46,6 @@ export const MenuOption = styled.li`
   font-weight: 500;
   margin: 15px 0;
   cursor: pointer;
-
   :hover {
     background: #eeeeee;
   }

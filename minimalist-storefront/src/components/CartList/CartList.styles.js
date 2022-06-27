@@ -1,7 +1,19 @@
 /////////////////////////////////////////////////////////////////////////////
 import styled, { css } from "styled-components";
 /////////////////////////////////////////////////////////////////////////////
-export const Wrapper = styled.div``;
+const CartDropdownStyle_Wrapper = css`
+  /* margin-bottom: 32px; */
+`;
+export const Wrapper = styled.div`
+  ${({ pageStyle }) => {
+    switch (pageStyle) {
+      case "CartDropdown":
+        return CartDropdownStyle_Wrapper;
+      default:
+        return css``;
+    }
+  }}
+`;
 /////////////////////////////////////////////////////////////////////////////
 const BaseStyle_List = css`
   display: flex;
@@ -120,9 +132,11 @@ export const CounterLabel = styled.span`
 /////////////////////////////////////////////////////////////////////////////
 const BaseStyle_ImgWrapper = css`
   position: relative;
-  align-self: baseline;
+  z-index: -1;
+  align-self: center;
   width: 200px;
   height: 288px;
+  overflow: hidden;
 `;
 const CartDropdownStyle_ImgWrapper = css`
   ${BaseStyle_ImgWrapper}
@@ -141,7 +155,6 @@ export const ImgWrapper = styled.div`
 `;
 /////////////////////////////////////////////////////////////////////////////
 export const ProductImage = styled.img`
-  background: cover;
   width: 100%;
   height: auto;
 `;

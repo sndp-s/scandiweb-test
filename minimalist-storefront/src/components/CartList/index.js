@@ -25,7 +25,7 @@ class CartList extends Component {
   render() {
     const { pageStyle } = this.props;
     return (
-      <Wrapper>
+      <Wrapper pageStyle={pageStyle}>
         <List pageStyle={pageStyle}>
           <Item pageStyle={pageStyle}>
             <div>
@@ -78,6 +78,7 @@ class CartList extends Component {
             </div>
           </Item>
         </List>
+
         {pageStyle === "CartPage" && (
           <OrderWrapper>
             <OrderCalcGrid>

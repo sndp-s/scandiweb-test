@@ -1,7 +1,20 @@
 import React, { Component } from "react";
 
 // component
-import { Wrapper, CartIcon, Dropdown } from "./CartDropdown.styles";
+import {
+  Wrapper,
+  CartIcon,
+  Dropdown,
+  ScrollableListWrapper,
+  Heading,
+  Overlay,
+  TotalWrapper,
+  Label,
+  Amount,
+  BtnsWrapper,
+  ViewBagBtn,
+  CheckOutBtn,
+} from "./CartDropdown.styles";
 import CartList from "../CartList";
 
 class CartDropdown extends Component {
@@ -17,15 +30,29 @@ class CartDropdown extends Component {
       <Wrapper>
         <CartIcon
           onClick={(event) => {
-            console.log("BEFORE: ", isMenuOpen);
             this.setState({ isMenuOpen: !isMenuOpen });
-            console.log("AFTER: ", isMenuOpen);
           }}
         />
         {isMenuOpen && (
-          <Dropdown>
-            <CartList pageStyle="CartDropdown" />
-          </Dropdown>
+          <>
+            <Overlay />
+            <Dropdown>
+              <Heading>
+                My Bag, <span>3 items</span>
+              </Heading>
+              <ScrollableListWrapper>
+                <CartList pageStyle="CartDropdown" />
+              </ScrollableListWrapper>
+              <TotalWrapper>
+                <Label>Total</Label>
+                <Amount>$200.00</Amount>
+              </TotalWrapper>
+              <BtnsWrapper>
+                <ViewBagBtn>View Bag</ViewBagBtn>
+                <CheckOutBtn>Check Out</CheckOutBtn>
+              </BtnsWrapper>
+            </Dropdown>
+          </>
         )}
       </Wrapper>
     );

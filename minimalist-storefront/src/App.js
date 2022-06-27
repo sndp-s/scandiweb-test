@@ -16,8 +16,8 @@ function App() {
     <div className="App">
       <Header />
       <CartPage />
+      <ProductDisplayPage />
       <HomePage />
-      <ProductDisplayPage/>
     </div>
   );
 }
