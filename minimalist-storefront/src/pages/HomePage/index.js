@@ -1,13 +1,35 @@
-// libs
+///////// libs /////////
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
-// components
+///////// components /////////
 import ProductListingPage from "../ProductListingPage";
 
+///////// actions /////////
+import { fetchPosts } from "../../features/store/slices/posts";
+
 class HomePage extends Component {
+  componentDidMount() {
+    this.props.dispatch(fetchPosts());
+  }
+
   render() {
-    return <ProductListingPage />;
+    const { posts } = this.props;
+    return (
+      // <ProductListingPage />
+      <div style={{ padding: "100px 300px" }}>
+        {posts.map((post) => (
+          <>
+            <p>{post.title}</p>
+            <br />
+          </>
+        ))}
+      </div>
+    );
   }
 }
 
-export default HomePage;
+const mapStateToProps = (state) => state.posts;
+// const mapDispatchToProps = (dispatch) => dispatch;
+
+export default connect(mapStateToProps)(HomePage);

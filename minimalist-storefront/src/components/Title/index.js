@@ -7,11 +7,9 @@ class Title extends Component {
   render() {
     const { text, pageStyle } = this.props;
     return (
-      <>
-        <Wrapper pageStyle={pageStyle}>
-          <Text pageStyle={pageStyle}>{text}</Text>
-        </Wrapper>
-      </>
+      <Wrapper pageStyle={pageStyle}>
+        <Text pageStyle={pageStyle}>{text}</Text>
+      </Wrapper>
     );
   }
 }

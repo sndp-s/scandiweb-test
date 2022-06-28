@@ -1,17 +1,20 @@
-// libs
+///////// libs /////////
+/// react ///
 import React from "react";
 import { createRoot } from "react-dom/client";
+/// redux store ///
 import { Provider } from "react-redux";
-import { store } from "./app/store";
+import store from "./features/store";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+/// misc ///
 import reportWebVitals from "./reportWebVitals";
 
-// pages
+///////// pages /////////
 import App from "./App";
 import CartPage from "./pages/CartPage";
 import ProductDisplayPage from "./pages/ProductDisplayPage";
 
-// assets
+///////// assets /////////
 import "./index.css";
 
 const container = document.getElementById("root");
