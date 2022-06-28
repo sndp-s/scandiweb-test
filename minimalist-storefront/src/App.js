@@ -1,25 +1,23 @@
-import React from "react";
+// libs
+import React, { Component } from "react";
 
 // components
-import Header from "./components/Header";
+import Layout from "./pages/Layout";
 import HomePage from "./pages/HomePage";
-import ProductDisplayPage from "./pages/ProductDisplayPage";
-import CartPage from "./pages/CartPage";
 
 // assets
 import "./Reset.css";
 import "./Global.css";
 import "./App.css";
 
-function App() {
-  return (
-    <div className="App">
-      <Header />
-      <CartPage />
-      <ProductDisplayPage />
-      <HomePage />
-    </div>
-  );
+class App extends Component {
+  render() {
+    return (
+      <Layout className="App">
+        <HomePage />
+      </Layout>
+    );
+  }
 }
 
 export default App;
