@@ -27,10 +27,8 @@ class Playground extends Component {
 }
 
 const mapStateToProps = (state) => state.posts;
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchPosts: () => dispatch(fetchPosts()),
-  };
-};
+const mapDispatchToProps = (dispatch) => ({
+  fetchPosts: () => dispatch(fetchPosts()),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Playground);
