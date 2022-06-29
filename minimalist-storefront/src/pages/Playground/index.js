@@ -5,6 +5,9 @@ import { connect } from "react-redux";
 ///////// actions /////////
 import { fetchPosts } from "../../features/playground/postsSlice";
 
+///////// pages /////////
+import ApolloDemo from "./ApolloDemo";
+
 class Playground extends Component {
   componentDidMount() {
     this.props.fetchPosts();
@@ -12,16 +15,17 @@ class Playground extends Component {
   render() {
     const { posts } = this.props;
     return (
-      <div style={{ padding: "100px 300px" }}>
-        <ul>
-          {posts.map((post, index) => (
-            <li key={index}>
-              <p>{post.title}</p>
-              <br />
-            </li>
-          ))}
-        </ul>
-      </div>
+      <ApolloDemo />
+      // <div style={{ padding: "100px 300px" }}>
+      //   <ul>
+      //     {posts.map((post, index) => (
+      //       <li key={index}>
+      //         <p>{post.title}</p>
+      //         <br />
+      //       </li>
+      //     ))}
+      //   </ul>
+      // </div>
     );
   }
 }
