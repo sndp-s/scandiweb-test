@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 ///////// actions /////////
-import { fetchPosts } from "../../features/store/slices/posts";
+import { fetchPosts } from "../../features/playground/postsSlice";
 
 class Playground extends Component {
   componentDidMount() {
