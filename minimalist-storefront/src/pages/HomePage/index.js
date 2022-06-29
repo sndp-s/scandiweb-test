@@ -10,26 +10,33 @@ import { fetchPosts } from "../../features/store/slices/posts";
 
 class HomePage extends Component {
   componentDidMount() {
-    this.props.dispatch(fetchPosts());
+    this.props.fetchPosts();
   }
 
   render() {
     const { posts } = this.props;
+    console.log(this.props);
     return (
       // <ProductListingPage />
       <div style={{ padding: "100px 300px" }}>
-        {posts.map((post) => (
-          <>
-            <p>{post.title}</p>
-            <br />
-          </>
-        ))}
+        {/* <ul>
+          {posts.map((post, index) => (
+            <li key={index}>
+              <p>{post.title}</p>
+              <br />
+            </li>
+          ))}
+        </ul> */}
       </div>
     );
   }
 }
 
 const mapStateToProps = (state) => state.posts;
-// const mapDispatchToProps = (dispatch) => dispatch;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchPosts: () => dispatch(fetchPosts()),
+  };
+};
 
-export default connect(mapStateToProps)(HomePage);
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
