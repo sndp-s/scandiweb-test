@@ -28,12 +28,16 @@ const postsSlice = createSlice({
 });
 ///////////////////////////////////////////////////////////////
 /* three action generated from the slice */
-export const { getPosts, getPostsSuccess, getPostsFailure } =
-  postsSlice.actions;
+export const {
+  getPosts,
+  getPostsSuccess,
+  getPostsFailure,
+} = postsSlice.actions;
 ///////////////////////////////////////////////////////////////
 // Async thunk action
 export function fetchPosts() {
   return async (dispatch) => {
+    dispatch(getPosts);
     try {
       const response = await fetch(
         "https://jsonplaceholder.typicode.com/posts"

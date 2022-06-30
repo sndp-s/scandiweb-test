@@ -1,7 +1,5 @@
 ///////// libs /////////
 import React, { Component } from "react";
-
-///////// API /////////
 import { request, gql } from "graphql-request";
 
 class ApolloDemo extends Component {
