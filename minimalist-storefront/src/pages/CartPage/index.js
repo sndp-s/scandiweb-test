@@ -10,7 +10,7 @@ class CartPage extends Component {
   render() {
     return (
       <Layout>
-        <main className="container">
+        <main>
           <Title text="CART" pageStyle="CartPage">
             CART
           </Title>

@@ -14,7 +14,7 @@ class ProductDisplayPage extends Component {
     };
     return (
       <Layout>
-        <main className="container" style={style}>
+        <main style={style}>
           <ProductShowcase />
           <ProductOptions pageStyle="ProductDisplayPage" />
         </main>

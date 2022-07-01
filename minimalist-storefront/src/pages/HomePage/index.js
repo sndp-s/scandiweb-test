@@ -1,13 +1,26 @@
 ///////// libs /////////
 import React, { Component } from "react";
-
-///////// components /////////
+import { connect } from "react-redux";
+///////// pages /////////
+import Layout from "../Layout";
 import ProductListingPage from "../ProductListingPage";
+
+///////// reducers /////////
 
 class HomePage extends Component {
   render() {
-    return <ProductListingPage />;
+    return (
+      <>
+        <Layout>
+          <ProductListingPage />
+        </Layout>
+      </>
+    );
   }
 }
 
-export default HomePage;
+const mapStateToProps = (state) => ({});
+
+const mapDispatchToProps = (dispatch) => ({});
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
