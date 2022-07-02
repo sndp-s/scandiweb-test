@@ -21,6 +21,10 @@ export const fetchCategoriesNames = async () => {
   }
 };
 /////////////////////////////////////////////////////////////////////////
+export const fetchCategoryProducts = async () => {
+  return [];
+};
+/////////////////////////////////////////////////////////////////////////
 const currenciesQuery = gql`
   {
     currencies {
@@ -29,16 +33,12 @@ const currenciesQuery = gql`
     }
   }
 `;
-export const fetchCurrencies = async () => {
+export const fetchCurrenciesAPI = async () => {
   try {
     const data = await request(URI, currenciesQuery);
     return data;
   } catch (error) {
-    return error;
+    return "unable to fetch currencies :(";
   }
-};
-/////////////////////////////////////////////////////////////////////////
-export const fetchCategoryProducts = async () => {
-  return [];
 };
 /////////////////////////////////////////////////////////////////////////

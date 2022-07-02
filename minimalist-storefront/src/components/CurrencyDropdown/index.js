@@ -1,6 +1,8 @@
+///////// libs /////////
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
-// styled components
+///////// components /////////
 import {
   Wrapper,
   CurrencyIcon,
@@ -10,42 +12,40 @@ import {
   MenuOption,
 } from "./CurrencyDropdown.styles";
 
+///////// thunk /////////
+import {
+  fetchCurrencies,
+  setCurrentCurrency,
+} from "../../features/currenciesSlice";
+
 class CurrencyDropdown extends Component {
   constructor(props) {
     super(props);
     this.state = {
       dropdownClicked: false,
-      currencyPref: "usd",
-      currencyIcon: "$",
     };
   }
-
-  //////////////////////// helpers ////////////////////////
-  validCurrencies = new Map([
-    ["usd", "$"],
-    ["eur", "€"],
-    ["jpy", "¥"],
-  ]);
-  renderCurrencyMenu = () => (
+  componentDidMount() {
+    this.props.fetchCurrencies();
+  }
+  /// helpers ///
+  renderCurrencyMenu = (currencies, setCurrentCurrency) => (
     <DropdownMenu>
-      <MenuOption
-        id="usd"
-        onClick={(event) => this.handleCurrencyOptionClick(event)}
-      >
-        &#36; USD
-      </MenuOption>
-      <MenuOption
-        id="eur"
-        onClick={(event) => this.handleCurrencyOptionClick(event)}
-      >
-        &#8364; EUR
-      </MenuOption>
-      <MenuOption
-        id="jpy"
-        onClick={(event) => this.handleCurrencyOptionClick(event)}
-      >
-        &#165; JPY
-      </MenuOption>
+      {currencies.map((currency) => (
+        <MenuOption
+          id={currency.label}
+          key={currency.label}
+          onClick={(event) =>
+            this.handleCurrencyOptionClick(
+              event,
+              currencies,
+              setCurrentCurrency
+            )
+          }
+        >
+          {currency.symbol} {currency.label}
+        </MenuOption>
+      ))}
     </DropdownMenu>
   );
   handleDropdownClick = (event) => {
@@ -53,30 +53,41 @@ class CurrencyDropdown extends Component {
       dropdownClicked: !this.state.dropdownClicked,
     });
   };
-  handleCurrencyOptionClick = (event) => {
-    const currency = event.target.id;
-    this.setCurrencyPref(currency);
+  handleCurrencyOptionClick = (event, currencies, setCurrentCurrency) => {
+    const selectedCurrencyLabel = event.target.id;
+    const selectedCurrency = currencies.find(
+      (currency) => currency.label === selectedCurrencyLabel
+    );
+    setCurrentCurrency(selectedCurrency);
   };
   setCurrencyPref = (currency) =>
     this.setState({
       dropdownClicked: false,
       currencyPref: currency,
-      currencyIcon: this.validCurrencies.get(currency),
     });
   /////////////////////////////////////////////////////////
-
   render() {
-    const { dropdownClicked, currencyIcon } = this.state;
+    const { dropdownClicked } = this.state;
+    const { currencies, current, setCurrentCurrency } = this.props;
     return (
       <Wrapper>
         <TopWrapper onClick={(event) => this.handleDropdownClick(event)}>
-          <CurrencyIcon>{currencyIcon}</CurrencyIcon>
+          <CurrencyIcon>{current.symbol}</CurrencyIcon>
           <DropdownIcon isOpen={dropdownClicked} />
         </TopWrapper>
-        {dropdownClicked && this.renderCurrencyMenu()}
+        {dropdownClicked &&
+          this.renderCurrencyMenu(currencies, setCurrentCurrency)}
       </Wrapper>
     );
   }
 }
+/////////////////////////////////////////////////////////
+const mapStateToProps = ({ currencies }) => currencies;
 
-export default CurrencyDropdown;
+const mapDispatchToProps = (dispatch) => ({
+  fetchCurrencies: () => dispatch(fetchCurrencies()),
+  setCurrentCurrency: (currency) => dispatch(setCurrentCurrency(currency)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CurrencyDropdown);
+/////////////////////////////////////////////////////////

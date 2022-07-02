@@ -6,9 +6,10 @@ import { Grid } from "./ProductGrid.styles";
 
 class ProductGrid extends Component {
   render() {
+    const { category } = this.props;
     return (
       <Grid>
-        <SingleProductThumbnail isInStock={false}/>
+        <SingleProductThumbnail />
         <SingleProductThumbnail />
         <SingleProductThumbnail />
         <SingleProductThumbnail />

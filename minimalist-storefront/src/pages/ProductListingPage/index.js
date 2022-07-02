@@ -1,19 +1,27 @@
-// libs
+/// libs ///
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
-// components
+/// components ///
 import Title from "../../components/Title";
 import ProductGrid from "../../components/ProductGrid";
 
 class ProductListingPage extends Component {
   render() {
+    const { current } = this.props.categories;
     return (
       <main>
-        <Title text="Category name" pageStyle="ProductListingPage" />
-        <ProductGrid />
+        <Title text={current} pageStyle="ProductListingPage" />
+        <ProductGrid category={current} />
       </main>
     );
   }
 }
 
-export default ProductListingPage;
+const mapStateToProps = (state) => {
+  return {
+    categories: state.categories,
+  };
+};
+
+export default connect(mapStateToProps)(ProductListingPage);

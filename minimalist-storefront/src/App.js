@@ -12,11 +12,7 @@ import "./Global.css";
 import "./App.css";
 import "./app/API";
 
-///////// reducers /////////
-import { fetchCategories } from "./features/categoriesSlice";
-
 class App extends Component {
-  
   render() {
     return (
       <Layout className="App">

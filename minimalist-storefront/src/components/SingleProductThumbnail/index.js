@@ -10,7 +10,7 @@ import {
 
 class SingleProductThumbnail extends Component {
   render() {
-    const { isInStock } = this.props;
+    // const { inStock } = this.props;
     return (
       <>
         <Wrapper>

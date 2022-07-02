@@ -8,40 +8,46 @@ import {
   Content,
   OptionsBar,
   Option,
-  OptionLink,
   Logo,
   RightSideWrapper,
 } from "./Header.styles";
 import CurrencyDropdown from "../CurrencyDropdown";
 import CartDropdown from "../CartDropdown";
 
-///////// reducers /////////
-import { fetchCategories } from "../../features/categoriesSlice";
+///////// thunk /////////
+import {
+  fetchCategories,
+  setCurrentCatergory,
+} from "../../features/categoriesSlice";
 
 class Header extends Component {
   componentDidMount() {
     this.props.fetchCategories();
   }
+  optionClickHandler = (event, setCurrentCatergory) => {
+    const currentCategory = event.target.id;
+    setCurrentCatergory(currentCategory);
+  };
   render() {
-    const { loading, hasErrors, categories } = this.props.categories;
+    const { setCurrentCatergory } = this.props;
+    const { categories, loading, hasErrors } = this.props.categories;
     return (
       <Wrapper>
         <Content className="container">
           <OptionsBar>
-            {/* <Option>
-              <OptionLink href="#">WOMEN</OptionLink>
-            </Option>
-            <Option>
-              <OptionLink href="#">MEN</OptionLink>
-            </Option>
-            <Option>
-              <OptionLink href="#">KIDS</OptionLink>
-            </Option> */}
-            {loading && <h1>loading</h1>}
-            {hasErrors && <h1>ERROR :(</h1>}
+            {loading && <h1>loading</h1> /* tofo: handle this globally*/}
+            {hasErrors && (
+              <h1>ERROR :(</h1>
+            ) /* todo: handle this in another way*/}
             {categories.map((category, index) => (
-              <Option key={index}>
-                <OptionLink href="#">{category.name}</OptionLink>
+              <Option
+                id={category.name}
+                key={index}
+                onClick={(event) =>
+                  this.optionClickHandler(event, setCurrentCatergory)
+                }
+              >
+                {category.name}
               </Option>
             ))}
           </OptionsBar>
@@ -58,12 +64,10 @@ class Header extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    categories: state.categories,
-  };
-};
+const mapStateToProps = ({ categories }) => ({ categories });
 const mapDispatchToProps = (dispatch) => ({
   fetchCategories: () => dispatch(fetchCategories()),
+  setCurrentCatergory: (currentCategory) =>
+    dispatch(setCurrentCatergory(currentCategory)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
