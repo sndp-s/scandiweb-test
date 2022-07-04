@@ -17,12 +17,8 @@ export const fetchCategoriesNames = async () => {
     const data = await request(URI, categoriesNameQuery);
     return data.categories;
   } catch (error) {
-    return "unable to fetch catergory names :(";
+    return error;
   }
-};
-/////////////////////////////////////////////////////////////////////////
-export const fetchCategoryProducts = async () => {
-  return [];
 };
 /////////////////////////////////////////////////////////////////////////
 const currenciesQuery = gql`
@@ -38,7 +34,36 @@ export const fetchCurrenciesAPI = async () => {
     const data = await request(URI, currenciesQuery);
     return data;
   } catch (error) {
-    return "unable to fetch currencies :(";
+    return error;
+  }
+};
+/////////////////////////////////////////////////////////////////////////
+const categoriesQuery = gql`
+  {
+    categories {
+      name
+      products {
+        id
+        name
+        brand
+        inStock
+        gallery
+        prices {
+          currency {
+            symbol
+          }
+          amount
+        }
+      }
+    }
+  }
+`;
+export const fetchCategoriesAPI = async () => {
+  try {
+    const data = await request(URI, categoriesQuery);
+    return data;
+  } catch (error) {
+    return error;
   }
 };
 /////////////////////////////////////////////////////////////////////////

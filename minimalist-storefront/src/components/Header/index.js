@@ -1,59 +1,25 @@
 ///////// libs /////////
 import React, { Component } from "react";
-import { connect } from "react-redux";
 
 ///////// components /////////
-import {
-  Wrapper,
-  Content,
-  OptionsBar,
-  Option,
-  Logo,
-  RightSideWrapper,
-} from "./Header.styles";
+import Navbar from "../Navbar";
 import CurrencyDropdown from "../CurrencyDropdown";
 import CartDropdown from "../CartDropdown";
+/// styled components ///
+import { Wrapper, Content, Logo, RightSideWrapper } from "./Header.styles";
+/// data providers ///
+import CategoriesProvider from "../../components/CategoriesProvider";
 
-///////// thunk /////////
-import {
-  fetchCategories,
-  setCurrentCatergory,
-} from "../../features/categoriesSlice";
+///////// context /////////
+import CategoriesContext from "../../app/context/CategoriesContext";
 
 class Header extends Component {
-  componentDidMount() {
-    this.props.fetchCategories();
-  }
-  optionClickHandler = (event, setCurrentCatergory) => {
-    const currentCategory = event.target.id;
-    setCurrentCatergory(currentCategory);
-  };
   render() {
-    const { setCurrentCatergory } = this.props;
-    const { categories, loading, hasErrors } = this.props.categories;
     return (
       <Wrapper>
         <Content className="container">
-          <OptionsBar>
-            {loading && <h1>loading</h1> /* tofo: handle this globally*/}
-            {hasErrors && (
-              <h1>ERROR :(</h1>
-            ) /* todo: handle this in another way*/}
-            {categories.map((category, index) => (
-              <Option
-                id={category.name}
-                key={index}
-                onClick={(event) =>
-                  this.optionClickHandler(event, setCurrentCatergory)
-                }
-              >
-                {category.name}
-              </Option>
-            ))}
-          </OptionsBar>
-          <a href="/">
-            <Logo />
-          </a>
+          <Navbar />
+          <Logo />
           <RightSideWrapper>
             <CurrencyDropdown />
             <CartDropdown />
@@ -64,10 +30,4 @@ class Header extends Component {
   }
 }
 
-const mapStateToProps = ({ categories }) => ({ categories });
-const mapDispatchToProps = (dispatch) => ({
-  fetchCategories: () => dispatch(fetchCategories()),
-  setCurrentCatergory: (currentCategory) =>
-    dispatch(setCurrentCatergory(currentCategory)),
-});
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default Header;

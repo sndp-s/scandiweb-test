@@ -15,10 +15,10 @@ import "./app/API";
 class App extends Component {
   render() {
     return (
-      <Layout className="App">
+      <div className="App">
         <HomePage />
         {/* <Playground /> */}
-      </Layout>
+      </div>
     );
   }
 }

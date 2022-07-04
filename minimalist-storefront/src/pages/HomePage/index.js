@@ -5,8 +5,6 @@ import { connect } from "react-redux";
 import Layout from "../Layout";
 import ProductListingPage from "../ProductListingPage";
 
-///////// reducers /////////
-
 class HomePage extends Component {
   render() {
     return (

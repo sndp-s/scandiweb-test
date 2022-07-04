@@ -1,10 +1,10 @@
-///////////////////////////////////////////////////////////////
 /// libs ///
 import { createSlice } from "@reduxjs/toolkit";
-///////////////////////////////////////////////////////////////
+
 /// API utils ///
-import { fetchCategoriesNames } from "../app/API";
-///////////////////////////////////////////////////////////////
+import { fetchCategoriesAPI } from "../app/API";
+
+/// createSlice ///
 const initialState = {
   categories: [],
   current: "",
@@ -19,41 +19,41 @@ const categoriesSlice = createSlice({
       state.loading = true;
     },
     getCategoriesSuccess: (state, { payload }) => {
-      state.categories = payload;
       state.loading = false;
-      state.hasErrors = false;
+      state.categories = payload;
     },
     getCategoriesFailure: (state) => {
       state.loading = false;
       state.hasErrors = true;
     },
-    setCurrentCatergory: (state, { payload }) => {
+    setCurrentCategory: (state, { payload }) => {
       state.current = payload;
     },
   },
 });
-///////////////////////////////////////////////////////////////
+
 /// actions ///
 export const {
   getCategories,
   getCategoriesSuccess,
   getCategoriesFailure,
-  setCurrentCatergory,
+  setCurrentCategory,
 } = categoriesSlice.actions;
-///////////////////////////////////////////////////////////////
-/// async thunk ///
+
+/// thunk ///
 export const fetchCategories = () => {
   return async (dispatch) => {
     dispatch(getCategories());
     try {
-      const categories = await fetchCategoriesNames();
-      dispatch(getCategoriesSuccess(categories));
-      dispatch(setCurrentCatergory(categories[0].name));
+      const data = await fetchCategoriesAPI();
+      dispatch(getCategoriesSuccess(data.categories));
+      const firstCategoryName = data.categories[0].name;
+      dispatch(setCurrentCategory(firstCategoryName));
     } catch (error) {
       dispatch(getCategoriesFailure());
     }
   };
 };
-///////////////////////////////////////////////////////////////
+
+/// slice reducer ///
 export default categoriesSlice.reducer;
-///////////////////////////////////////////////////////////////
