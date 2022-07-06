@@ -7,9 +7,9 @@ import {
   ListItem,
   Image,
   BigImgWrapper,
-} from "./ProductShowcase.styles";
+} from "./ProductGallery.styles";
 
-class ProductShowcase extends Component {
+class ProductGallery extends Component {
   render() {
     const style = { display: "inline-block" };
     return (
@@ -35,4 +35,4 @@ class ProductShowcase extends Component {
   }
 }
 
-export default ProductShowcase;
+export default ProductGallery;

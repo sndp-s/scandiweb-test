@@ -25,40 +25,27 @@ export const Wrapper = styled.div`
 `;
 
 export const Modal = styled.div`
-  /* out of stock style */
   position: absolute;
   display: none;
-  ${({ inStock }) => {
-    if (!inStock)
-      return css`
-        display: block;
-        background: #fff;
-        opacity: 0.5;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        z-index: 100;
-      `;
-  }}
+  display: block;
+  background: #fff;
+  opacity: 0.5;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
 `;
 
 export const ModalContent = styled.span`
-  display: none;
-
-  ${({ inStock }) => {
-    if (!inStock)
-      return css`
-        display: block;
-        font-size: 24px;
-        font-weight: 400;
-        font-family: "Raleway";
-        color: #8d8f9a;
-        text-transform: uppercase;
-        position: absolute;
-        transform: translate(50%, 151px);
-      `;
-  }}
+  display: block;
+  font-size: 24px;
+  font-weight: 400;
+  font-family: "Raleway";
+  color: #8d8f9a;
+  text-transform: uppercase;
+  position: absolute;
+  transform: translate(50%, 151px);
 `;
 
 export const ImageWrapper = styled.div`
@@ -86,16 +73,8 @@ export const AddToCartBtn = styled.button`
   margin-bottom: -22px;
   display: none;
 
-  /* todo - there is a bug here, fix it. moving on for progress. */
   ${Wrapper}:hover & {
-    ${({ inStock }) => {
-      return (
-        inStock &&
-        css`
-          display: block;
-        `
-      );
-    }}
+    display: block;
   }
 `;
 

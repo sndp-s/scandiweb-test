@@ -6,14 +6,19 @@ import { connect } from "react-redux";
 import Title from "../../components/Title";
 import ProductGrid from "../../components/ProductGrid";
 
+/// pages ///
+import Layout from "../Layout";
+
 class ProductListingPage extends Component {
   render() {
     const { current } = this.props.categories;
     return (
-      <main>
-        <Title text={current} pageStyle="ProductListingPage" />
-        <ProductGrid />
-      </main>
+      <Layout>
+        <main className="container">
+          <Title text={current} pageStyle="ProductListingPage" />
+          <ProductGrid />
+        </main>
+      </Layout>
     );
   }
 }

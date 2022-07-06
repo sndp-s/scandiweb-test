@@ -3,7 +3,7 @@ import React, { Component } from "react";
 
 // components
 import Layout from "../Layout";
-import ProductShowcase from "../../components/ProductShowcase";
+import ProductGallery from "../../components/ProductGallery";
 import ProductOptions from "../../components/ProductOptions";
 
 class ProductDisplayPage extends Component {
@@ -14,8 +14,8 @@ class ProductDisplayPage extends Component {
     };
     return (
       <Layout>
-        <main style={style}>
-          <ProductShowcase />
+        <main style={style} className="container">
+          <ProductGallery />
           <ProductOptions pageStyle="ProductDisplayPage" />
         </main>
       </Layout>

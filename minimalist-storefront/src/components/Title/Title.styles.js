@@ -30,6 +30,7 @@ const CartStyle_Text = css`
 `;
 export const Text = styled.h1`
   color: #1d1f22;
+  text-transform: capitalize;
   ${({ pageStyle }) => {
     switch (pageStyle) {
       case "ProductListingPage":

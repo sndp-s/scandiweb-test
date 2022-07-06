@@ -1,16 +1,18 @@
-// libs
+///////// libs /////////
 import React, { Component } from "react";
 
-// components
-import Layout from "../Layout";
+///////// components /////////
 import Title from "../../components/Title";
 import CartList from "../../components/CartList";
+
+///////// pages /////////
+import Layout from "../Layout";
 
 class CartPage extends Component {
   render() {
     return (
       <Layout>
-        <main>
+        <main className="container">
           <Title text="CART" pageStyle="CartPage">
             CART
           </Title>

@@ -91,11 +91,8 @@ class CurrencyDropdown extends Component {
     const { dropdownClicked } = this.state;
     const { current } = this.props;
     return (
-      <Wrapper>
-        <TopWrapper
-          id="dropdown"
-          onClick={(event) => this.handleDropdownClick(event)}
-        >
+      <Wrapper id="dropdown">
+        <TopWrapper onClick={(event) => this.handleDropdownClick(event)}>
           <CurrencyIcon>{current.symbol}</CurrencyIcon>
           <DropdownIcon isOpen={dropdownClicked} />
         </TopWrapper>
