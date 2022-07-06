@@ -1,26 +1,49 @@
+///////// libs /////////
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
-// components
+///////// components ////////
 import SingleProductThumbnail from "../SingleProductThumbnail";
 import { Grid } from "./ProductGrid.styles";
 
 class ProductGrid extends Component {
   render() {
-    const { category } = this.props;
+    const { currentCategoryProductsList } = this.props;
     return (
       <Grid>
-        <SingleProductThumbnail />
-        <SingleProductThumbnail />
-        <SingleProductThumbnail />
-        <SingleProductThumbnail />
-        <SingleProductThumbnail />
-        <SingleProductThumbnail />
-        <SingleProductThumbnail />
-        <SingleProductThumbnail />
-        <SingleProductThumbnail />
+        {currentCategoryProductsList.map((product, index) => {
+          const { id, name, inStock, gallery } = product;
+          return (
+            <SingleProductThumbnail
+              key={index}
+              id={id}
+              name={name}
+              gallery={gallery}
+              inStock={inStock}
+            />
+          );
+        })}
       </Grid>
     );
   }
 }
 
-export default ProductGrid;
+const mapStateToProps = ({ categories, currencies }) => {
+  let currentCategoryProductsList = [];
+  if (categories.categories.length > 0) {
+    const { current } = categories;
+    // currentCategoryProductsList = categories.categories.filter((category) => {
+    //   if (category.name === current) {
+    //     return category;
+    //   }
+    // })[0].products;
+    currentCategoryProductsList = categories.categories.find(
+      (category) => category.name === current
+    ).products;
+  }
+  return { currentCategoryProductsList };
+};
+// const mapDispatchToProps = (dispatch) => ({
+//   fetchCategories: () => dispatch(fetchCategories()),
+// });
+export default connect(mapStateToProps)(ProductGrid);

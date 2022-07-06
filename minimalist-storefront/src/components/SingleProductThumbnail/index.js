@@ -1,26 +1,33 @@
+///////// libs /////////
 import React, { Component } from "react";
 
-// components
+///////// components /////////
 import {
   Wrapper,
+  Modal,
+  ModalContent,
+  ImageWrapper,
   Image,
   Name,
   Price,
+  AddToCartBtn,
 } from "./SingleProductThumbnail.styles.js";
 
 class SingleProductThumbnail extends Component {
   render() {
-    // const { inStock } = this.props;
+    const { id, name, inStock, gallery } = this.props;
     return (
-      <>
-        <Wrapper>
-          <Image src="https://picsum.photos/200" alt="test" />
-          <Name>Apollo Running Short</Name>
-          <Price>
-            $<span className="nudge">50.00</span>
-          </Price>
-        </Wrapper>
-      </>
+      <Wrapper id={id} inStock={inStock}>
+        <Modal inStock={inStock}>
+          <ModalContent>OUT OF STOCK</ModalContent>
+        </Modal>
+        <ImageWrapper>
+          <Image src={gallery[0]} alt={id} />
+          <AddToCartBtn className="show" inStock={inStock} />
+        </ImageWrapper>
+        <Name>{name}</Name>
+        <Price>$50.00</Price>
+      </Wrapper>
     );
   }
 }

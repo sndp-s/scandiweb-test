@@ -7,6 +7,7 @@ export const Wrapper = styled.header`
   left: 0;
   right: 0;
   background: #fff;
+  z-index: 1000;
 `;
 /////////////////////////////////////////////////////////////////////////////
 export const Content = styled.div`

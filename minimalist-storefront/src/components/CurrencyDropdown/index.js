@@ -19,75 +19,97 @@ import {
 } from "../../features/currenciesSlice";
 
 class CurrencyDropdown extends Component {
+  ///////////////////////////////////////////////////////////////////////////////
   constructor(props) {
     super(props);
+    this.handleDropdownClick = this.handleDropdownClick.bind(this);
+    this.toggleDropdown = this.toggleDropdown.bind(this);
+    this.handleCurrencyClick = this.handleCurrencyClick.bind(this);
+    this.renderCurrencyMenu = this.renderCurrencyMenu.bind(this);
+    this.handleOutsideClicks = this.handleOutsideClicks.bind(this);
+
     this.state = {
       dropdownClicked: false,
     };
   }
-  componentDidMount() {
-    this.props.fetchCurrencies();
-  }
-  /// helpers ///
-  renderCurrencyMenu = (currencies, setCurrentCurrency) => (
-    <DropdownMenu>
-      {currencies.map((currency) => (
-        <MenuOption
-          id={currency.label}
-          key={currency.label}
-          onClick={(event) =>
-            this.handleCurrencyOptionClick(
-              event,
-              currencies,
-              setCurrentCurrency
-            )
-          }
-        >
-          {currency.symbol} {currency.label}
-        </MenuOption>
-      ))}
-    </DropdownMenu>
-  );
-  handleDropdownClick = (event) => {
+  ///////////////////////////////////////////////////////////////////////////////
+  ///////// helpers /////////
+  ///////////////////////////////////////////////////////////////////////////////
+  toggleDropdown = () =>
     this.setState({
       dropdownClicked: !this.state.dropdownClicked,
     });
-  };
-  handleCurrencyOptionClick = (event, currencies, setCurrentCurrency) => {
+  ///////////////////////////////////////////////////////////////////////////////
+  handleDropdownClick = () => this.toggleDropdown();
+  ///////////////////////////////////////////////////////////////////////////////
+  handleOutsideClicks(event) {
+    const { dropdownClicked } = this.state;
+    const dropdownElement = document.querySelector("#dropdown");
+    if (!dropdownElement.contains(event.target) && dropdownClicked) {
+      this.toggleDropdown();
+    }
+  }
+  ///////////////////////////////////////////////////////////////////////////////
+  handleCurrencyClick = (event) => {
+    const { currencies, setCurrentCurrency } = this.props;
     const selectedCurrencyLabel = event.target.id;
-    const selectedCurrency = currencies.find(
+    const selectedCurrencySymbol = currencies.find(
       (currency) => currency.label === selectedCurrencyLabel
     );
-    setCurrentCurrency(selectedCurrency);
+    setCurrentCurrency(selectedCurrencySymbol);
+    this.toggleDropdown();
   };
-  setCurrencyPref = (currency) =>
-    this.setState({
-      dropdownClicked: false,
-      currencyPref: currency,
-    });
-  /////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////////
+  renderCurrencyMenu = () => {
+    const { currencies } = this.props;
+    return (
+      <DropdownMenu>
+        {currencies.map((currency) => (
+          <MenuOption
+            id={currency.label}
+            key={currency.label}
+            onClick={(event) => this.handleCurrencyClick(event)}
+          >
+            {currency.symbol} {currency.label}
+          </MenuOption>
+        ))}
+      </DropdownMenu>
+    );
+  };
+  ///////////////////////////////////////////////////////////////////////////////
+  componentDidMount() {
+    const { fetchCurrencies } = this.props;
+    fetchCurrencies();
+    document.addEventListener("mousedown", this.handleOutsideClicks);
+  }
+  ///////////////////////////////////////////////////////////////////////////////
+  componentWillUnmount() {
+    document.removeEventListener("mousedown", this.handleOutsideClicks);
+  }
+  ///////////////////////////////////////////////////////////////////////////////
   render() {
     const { dropdownClicked } = this.state;
-    const { currencies, current, setCurrentCurrency } = this.props;
+    const { current } = this.props;
     return (
       <Wrapper>
-        <TopWrapper onClick={(event) => this.handleDropdownClick(event)}>
+        <TopWrapper
+          id="dropdown"
+          onClick={(event) => this.handleDropdownClick(event)}
+        >
           <CurrencyIcon>{current.symbol}</CurrencyIcon>
           <DropdownIcon isOpen={dropdownClicked} />
         </TopWrapper>
-        {dropdownClicked &&
-          this.renderCurrencyMenu(currencies, setCurrentCurrency)}
+        {dropdownClicked && this.renderCurrencyMenu()}
       </Wrapper>
     );
   }
 }
-/////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 const mapStateToProps = ({ currencies }) => currencies;
-
 const mapDispatchToProps = (dispatch) => ({
   fetchCurrencies: () => dispatch(fetchCurrencies()),
   setCurrentCurrency: (currency) => dispatch(setCurrentCurrency(currency)),
 });
-
+///////////////////////////////////////////////////////////////////////////////
 export default connect(mapStateToProps, mapDispatchToProps)(CurrencyDropdown);
-/////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////

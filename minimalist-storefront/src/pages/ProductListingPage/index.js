@@ -12,7 +12,7 @@ class ProductListingPage extends Component {
     return (
       <main>
         <Title text={current} pageStyle="ProductListingPage" />
-        <ProductGrid category={current} />
+        <ProductGrid />
       </main>
     );
   }
