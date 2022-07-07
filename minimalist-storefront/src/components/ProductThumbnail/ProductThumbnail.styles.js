@@ -5,7 +5,6 @@ export const Wrapper = styled.div`
   max-width: 386px;
   padding: 16px;
   position: relative;
-  cursor: pointer;
   :hover {
     box-shadow: 1px 1px 30px 10px rgba(1, 1, 1, 0.1);
   }

@@ -1,5 +1,6 @@
 ///////// libs /////////
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 ///////// components /////////
 import {
@@ -16,7 +17,6 @@ import {
 class ProductThumbnail extends Component {
   render() {
     const { id, name, inStock, gallery, price } = this.props;
-    console.log();
     return (
       <Wrapper id={id} inStock={inStock}>
         {!inStock && (
@@ -26,7 +26,11 @@ class ProductThumbnail extends Component {
         )}
         <ImageWrapper>
           <Image src={gallery[0]} alt={id} />
-          {inStock && <AddToCartBtn />}
+          {inStock && (
+            <Link to={`/product/${id}`}>
+              <AddToCartBtn />
+            </Link>
+          )}
         </ImageWrapper>
         <Name>{name}</Name>
         <Price>

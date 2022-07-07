@@ -1,5 +1,6 @@
 ///////// libs /////////
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 ///////// components /////////
 import Navbar from "../Navbar";
@@ -14,7 +15,9 @@ class Header extends Component {
       <Wrapper>
         <Content className="container">
           <Navbar />
-          <Logo />
+          <Link to="/">
+            <Logo />
+          </Link>
           <RightSideWrapper>
             <CurrencyDropdown />
             <CartDropdown />

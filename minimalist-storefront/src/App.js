@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 ///////// pages /////////
+import Layout from "./pages/Layout";
 import HomePage from "./pages/HomePage";
 import CartPage from "./pages/CartPage";
 import ProductDisplayPage from "./pages/ProductDisplayPage";
@@ -19,11 +20,12 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Routes>
-          <Route index element={<HomePage />} />
-          <Route path="home" element={<HomePage />} />
-          <Route path="product:productId" element={<ProductDisplayPage />} />
-          <Route path="cart" element={<CartPage />} />
-          <Route path="*" element={<NoMatch />} />
+          <Route path="/" element={<Layout />}>
+            <Route index element={<HomePage />} />
+            <Route path="product/:Id" element={<ProductDisplayPage />} />
+            <Route path="cart" element={<CartPage />} />
+            <Route path="*" element={<NoMatch />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     );

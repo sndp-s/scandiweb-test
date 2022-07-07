@@ -11,7 +11,6 @@ export const TopWrapper = styled.div`
   justify-content: flex-end;
   align-items: flex-end;
   cursor: pointer;
-  
 `;
 /////////////////////////////////////////////////////////////////////////////
 export const CurrencyIcon = styled.span`

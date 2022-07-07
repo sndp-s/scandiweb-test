@@ -1,6 +1,9 @@
 /////////////////////////////////////////////////////////////////////////////
 import styled, { css } from "styled-components";
 /////////////////////////////////////////////////////////////////////////////
+const BaseStyle_Wrapper = css`
+  margin-bottom: 100px;
+`;
 const CartDropdownStyle_Wrapper = css`
   /* margin-bottom: 32px; */
 `;
@@ -10,7 +13,7 @@ export const Wrapper = styled.div`
       case "CartDropdown":
         return CartDropdownStyle_Wrapper;
       default:
-        return css``;
+        return BaseStyle_Wrapper;
     }
   }}
 `;
@@ -199,7 +202,7 @@ export const OrderWrapper = styled.div`
 /////////////////////////////////////////////////////////////////////////////
 export const OrderCalcGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 1Fr);
+  grid-template-columns: repeat(2, 1fr);
   margin-top: 32px;
   margin-bottom: 16px;
   grid-row-gap: 8px;

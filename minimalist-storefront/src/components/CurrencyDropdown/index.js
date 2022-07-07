@@ -1,5 +1,5 @@
 ///////// libs /////////
-import React, { Component } from "react";
+import React, { Component, createRef } from "react";
 import { connect } from "react-redux";
 
 ///////// components /////////
@@ -22,30 +22,34 @@ class CurrencyDropdown extends Component {
   ///////////////////////////////////////////////////////////////////////////////
   constructor(props) {
     super(props);
+
+    /* bind method to class's this variable */
     this.handleDropdownClick = this.handleDropdownClick.bind(this);
     this.toggleDropdown = this.toggleDropdown.bind(this);
     this.handleCurrencyClick = this.handleCurrencyClick.bind(this);
     this.renderCurrencyMenu = this.renderCurrencyMenu.bind(this);
     this.handleOutsideClicks = this.handleOutsideClicks.bind(this);
 
+    /* vairables */
+    this.mainWrapperRef = createRef();
+
     this.state = {
-      dropdownClicked: false,
+      isOpen: false,
     };
   }
   ///////////////////////////////////////////////////////////////////////////////
-  ///////// helpers /////////
+  /// helpers ///
   ///////////////////////////////////////////////////////////////////////////////
   toggleDropdown = () =>
     this.setState({
-      dropdownClicked: !this.state.dropdownClicked,
+      isOpen: !this.state.isOpen,
     });
   ///////////////////////////////////////////////////////////////////////////////
   handleDropdownClick = () => this.toggleDropdown();
   ///////////////////////////////////////////////////////////////////////////////
   handleOutsideClicks(event) {
-    const { dropdownClicked } = this.state;
-    const dropdownElement = document.querySelector("#dropdown");
-    if (!dropdownElement.contains(event.target) && dropdownClicked) {
+    const { isOpen } = this.state;
+    if (!this.mainWrapperRef.current.contains(event.target) && isOpen) {
       this.toggleDropdown();
     }
   }
@@ -77,6 +81,8 @@ class CurrencyDropdown extends Component {
     );
   };
   ///////////////////////////////////////////////////////////////////////////////
+  /// lifecycle methods ///
+  ///////////////////////////////////////////////////////////////////////////////
   componentDidMount() {
     const { fetchCurrencies } = this.props;
     fetchCurrencies();
@@ -88,15 +94,15 @@ class CurrencyDropdown extends Component {
   }
   ///////////////////////////////////////////////////////////////////////////////
   render() {
-    const { dropdownClicked } = this.state;
+    const { isOpen } = this.state;
     const { current } = this.props;
     return (
-      <Wrapper id="dropdown">
+      <Wrapper ref={this.mainWrapperRef}>
         <TopWrapper onClick={(event) => this.handleDropdownClick(event)}>
           <CurrencyIcon>{current.symbol}</CurrencyIcon>
-          <DropdownIcon isOpen={dropdownClicked} />
+          <DropdownIcon isOpen={isOpen} />
         </TopWrapper>
-        {dropdownClicked && this.renderCurrencyMenu()}
+        {isOpen && this.renderCurrencyMenu()}
       </Wrapper>
     );
   }
