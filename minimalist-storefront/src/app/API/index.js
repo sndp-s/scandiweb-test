@@ -67,3 +67,41 @@ export const fetchCategoriesAPI = async () => {
   }
 };
 /////////////////////////////////////////////////////////////////////////
+const productQuery = (productId) => {
+  return gql`
+     {
+      product(id: "${productId}") {
+        name
+        gallery
+        description
+        attributes {
+          name
+          id
+          type
+          items {
+            displayValue
+            value
+            id
+          }
+        }
+        prices {
+          currency {
+            label
+            symbol
+          }
+          amount
+        }
+        brand
+      }
+    }
+  `;
+};
+export const fetchProductAPI = async (productId) => {
+  try {
+    const data = await request(URI, productQuery(productId));
+    return data;
+  } catch (error) {
+    return error;
+  }
+};
+/////////////////////////////////////////////////////////////////////////

@@ -5,11 +5,11 @@ import { Brand, Item } from "./ProductInfoTitle.styles";
 
 class ProductInfoTitle extends Component {
   render() {
-    const { pageStyle } = this.props;
+    const { pageStyle, name, brand } = this.props;
     return (
       <>
-        <Brand pageStyle={pageStyle}>Apollo</Brand>
-        <Item pageStyle={pageStyle}>Running Short</Item>
+        <Brand pageStyle={pageStyle}>{brand}</Brand>
+        <Item pageStyle={pageStyle}>{name}</Item>
       </>
     );
   }

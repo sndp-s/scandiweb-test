@@ -22,28 +22,20 @@ export const PriceLabel = styled.p`
 `;
 ////////////////////////////////////////////////////////////////////
 const BaseStyle_PriceValue = css`
+  font-family: "Raleway";
   font-size: 24px;
   font-weight: 700;
   line-height: 26px;
   color: #1d1f22;
 `;
-const BaseCartDropdownStyle_priceValue = css`
+const CartDropdownStyle_PriceValue = css`
   font-size: 16px;
   font-weight: 500;
   line-height: 16px;
 `;
-const CartDropdownStyle_PriceValue = css`
-  ${BaseCartDropdownStyle_priceValue}
-  .nudge {
-    ${BaseCartDropdownStyle_priceValue}
-  }
-`;
 export const PriceValue = styled.p`
   ${BaseStyle_PriceValue}
-  .nudge {
-    ${BaseStyle_PriceValue}
-    vertical-align: text-top;
-  }
+
   ${({ pageStyle }) => {
     switch (pageStyle) {
       case "CartDropdown":

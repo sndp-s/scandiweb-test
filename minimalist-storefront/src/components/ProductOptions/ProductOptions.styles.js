@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const Wrapper = styled.div`
   display: inline-block;
   margin-left: 50px;
-  max-width: 292px;
   width: 100%;
 `;
 
@@ -17,7 +16,7 @@ export const Button = styled.button`
   margin-bottom: 40px;
 `;
 
-export const Info = styled.p`
+export const Description = styled.div`
   font-weight: 400;
   font-size: 16px;
   line-height: 160%;

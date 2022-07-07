@@ -3,62 +3,53 @@
 import { createSlice } from "@reduxjs/toolkit";
 //////////////////////////////////////////////////////////////////////
 /// API utils ///
-import { fetchCurrenciesAPI } from "../app/API";
+import { fetchProductAPI } from "../app/API";
 //////////////////////////////////////////////////////////////////////
 /// slice ///
 const initialState = {
-  currencies: [],
-  current: {
-    label: "",
-    symbol: "",
-  },
+  product: {},
   loading: false,
   hasErrors: false,
 };
-const currenciesSlice = createSlice({
-  name: "currenciesState",
+const productSlice = createSlice({
+  name: "productState",
   initialState,
   reducers: {
-    getCurrencies: (state) => {
+    getProduct: (state) => {
       state.loading = true;
     },
-    getCurrenciesSuccess: (state, { payload }) => {
-      state.currencies = payload;
+    getProductSuccess: (state, { payload }) => {
+      state.product = payload;
       state.loading = false;
       state.hasErrors = false;
     },
-    getCurrenciesFailure: (state) => {
+    getProductFailure: (state) => {
       state.loading = false;
       state.hasErrors = true;
-    },
-    setCurrentCurrency: (state, { payload }) => {
-      state.current = payload;
     },
   },
 });
 //////////////////////////////////////////////////////////////////////
 /// actions ///
 export const {
-  getCurrencies,
-  getCurrenciesSuccess,
-  getCurrenciesFailure,
-  setCurrentCurrency,
-} = currenciesSlice.actions;
+  getProduct,
+  getProductSuccess,
+  getProductFailure,
+} = productSlice.actions;
 //////////////////////////////////////////////////////////////////////
-/// fetchCurrencies thunk ///
-export const fetchCurrencies = () => {
+/// fetchProduct thunk ///
+export const fetchProduct = (productId) => {
   return async (dispatch) => {
-    dispatch(getCurrencies());
+    dispatch(getProduct());
     try {
-      const data = await fetchCurrenciesAPI();
-      dispatch(getCurrenciesSuccess(data.currencies));
-      dispatch(setCurrentCurrency(data.currencies[0]));
+      const data = await fetchProductAPI(productId);
+      dispatch(getProductSuccess(data.product));
     } catch (error) {
-      dispatch(getCurrenciesFailure());
+      dispatch(getProductFailure());
     }
   };
 };
 //////////////////////////////////////////////////////////////////////
 /// reducer ///
-export default currenciesSlice.reducer;
+export default productSlice.reducer;
 //////////////////////////////////////////////////////////////////////

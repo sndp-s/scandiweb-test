@@ -22,7 +22,7 @@ class App extends Component {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<HomePage />} />
-            <Route path="product/:Id" element={<ProductDisplayPage />} />
+            <Route path="product/:productId" element={<ProductDisplayPage />} />
             <Route path="cart" element={<CartPage />} />
             <Route path="*" element={<NoMatch />} />
           </Route>

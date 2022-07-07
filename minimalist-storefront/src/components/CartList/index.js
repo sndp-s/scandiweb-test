@@ -18,7 +18,7 @@ import {
 } from "./CartList.styles";
 import ProductInfoTitle from "../ProductInfoTitle";
 import ProductInfoPrice from "../ProductInfoPrice";
-import ProductInfoSize from "../ProductInfoSize";
+// import ProductInfoSize from "../ProductInfoSize";
 import ProductInfoColor from "../ProductInfoColor";
 
 class CartList extends Component {
@@ -31,7 +31,7 @@ class CartList extends Component {
             <div>
               <ProductInfoTitle pageStyle={pageStyle}></ProductInfoTitle>
               <ProductInfoPrice pageStyle={pageStyle}></ProductInfoPrice>
-              <ProductInfoSize pageStyle={pageStyle} />
+              {/* <ProductInfoSize pageStyle={pageStyle} /> */}
               <ProductInfoColor pageStyle={pageStyle} />
             </div>
             <div style={{ display: "flex" }}>
@@ -56,7 +56,7 @@ class CartList extends Component {
             <div>
               <ProductInfoTitle pageStyle={pageStyle}></ProductInfoTitle>
               <ProductInfoPrice pageStyle={pageStyle}></ProductInfoPrice>
-              <ProductInfoSize pageStyle={pageStyle} />
+              {/* <ProductInfoSize pageStyle={pageStyle} /> */}
               <ProductInfoColor pageStyle={pageStyle} />
             </div>
             <div style={{ display: "flex" }}>

@@ -9,30 +9,39 @@ import {
   BigImgWrapper,
 } from "./ProductGallery.styles";
 
-class ProductGallery extends Component {
+class ProductShowcase extends Component {
+  constructor(props) {
+    super(props);
+    this.handleImageClick = this.handleImageClick.bind(this);
+    this.state = {
+      focusImageIndex: 0,
+    };
+  }
+  handleImageClick = (event) =>
+    this.setState({ focusImageIndex: event.target.id });
+
   render() {
-    const style = { display: "inline-block" };
+    const { gallery } = this.props;
     return (
-      <div style={style}>
-        <Wrapper>
-          <ImgList>
-            <ListItem>
-              <Image src="https://picsum.photos/80/80" />
-            </ListItem>
-            <ListItem>
-              <Image src="https://picsum.photos/80/80" />
-            </ListItem>
-            <ListItem>
-              <Image src="https://picsum.photos/80/80" />
-            </ListItem>
-          </ImgList>
-          <BigImgWrapper>
-            <Image src="https://picsum.photos/610/510" />
-          </BigImgWrapper>
-        </Wrapper>
-      </div>
+      <Wrapper>
+        <ImgList>
+          {gallery.map((imageSrc, index) => {
+            return (
+              <ListItem
+                key={index}
+                onClick={(event) => this.handleImageClick(event)}
+              >
+                <Image src={imageSrc} id={index} />
+              </ListItem>
+            );
+          })}
+        </ImgList>
+        <BigImgWrapper>
+          <Image src={gallery[this.state.focusImageIndex]} />
+        </BigImgWrapper>
+      </Wrapper>
     );
   }
 }
 
-export default ProductGallery;
+export default ProductShowcase;
