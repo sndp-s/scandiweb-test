@@ -3,33 +3,35 @@ import React, { Component } from "react";
 import parse from "html-react-parser";
 
 ///////// components /////////
-import { Wrapper, Button, Description } from "./ProductOptions.styles";
-import ProductInfoTitle from "../ProductInfoTitle";
-import ProductInfoColor from "../ProductInfoColor";
-import ProductInfoPrice from "../ProductInfoPrice";
-import ProductInfoAttribute from "../ProductInfoAttribute";
+import { Wrapper, Description } from "./ProductOptions.styles";
+import ProductTitle from "../ProductTitle";
+import ProductAttributes from "../ProductAttributes";
+import ProductPrice from "../ProductPrice";
+import AddToCartBtn from "../AddToCartBtn";
+
+///////// context /////////
+import ProductContext from "../../app/contexts/ProductContext";
 
 class ProductOptions extends Component {
   render() {
-    const {
-      pageStyle,
-      attributes,
-      brand,
-      description,
-      name,
-      price,
-    } = this.props;
-    console.log(attributes);
+    const { pageStyle } = this.props;
     return (
-      <Wrapper>
-        <ProductInfoTitle pageStyle={pageStyle} name={name} brand={brand} />
-        {attributes.map((attribute) => (
-          <ProductInfoAttribute attribute={attribute} pageStyle={pageStyle} />
-        ))}
-        <ProductInfoPrice pageStyle={pageStyle} price={price} />
-        <Button>ADD TO CART</Button>
-        <Description>{parse(description)}</Description>
-      </Wrapper>
+      <ProductContext.Consumer>
+        {({ attributes, brand, description, name, price }) => {
+          return (
+            <Wrapper>
+              <ProductTitle pageStyle={pageStyle} name={name} brand={brand} />
+              <ProductAttributes
+                pageStyle={pageStyle}
+                attributes={attributes}
+              />
+              <ProductPrice pageStyle={pageStyle} price={price} />
+              <AddToCartBtn />
+              <Description>{parse(description)}</Description>
+            </Wrapper>
+          );
+        }}
+      </ProductContext.Consumer>
     );
   }
 }

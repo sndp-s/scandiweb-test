@@ -5,9 +5,9 @@ import {
   PriceWrapper,
   PriceLabel,
   PriceValue,
-} from "./ProductInfoPrice.styles";
+} from "./ProductPrice.styles";
 
-class ProductInfoPrice extends Component {
+class ProductPrice extends Component {
   render() {
     const { pageStyle, price } = this.props;
     const { amount, currency } = price;
@@ -23,4 +23,4 @@ class ProductInfoPrice extends Component {
   }
 }
 
-export default ProductInfoPrice;
+export default ProductPrice;

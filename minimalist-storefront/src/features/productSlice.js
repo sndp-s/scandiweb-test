@@ -8,6 +8,8 @@ import { fetchProductAPI } from "../app/API";
 /// slice ///
 const initialState = {
   product: {},
+  allAttributes: [],
+  selectedAttributeOptions: {},
   loading: false,
   hasErrors: false,
 };
@@ -20,12 +22,17 @@ const productSlice = createSlice({
     },
     getProductSuccess: (state, { payload }) => {
       state.product = payload;
+      state.allAttributes = payload.attributes.map((attribute) => attribute.id);
       state.loading = false;
       state.hasErrors = false;
     },
     getProductFailure: (state) => {
       state.loading = false;
       state.hasErrors = true;
+    },
+    setAttributeOption: (state, { payload }) => {
+      const { attributeId, selectedOptionId } = payload;
+      state.selectedAttributeOptions[attributeId] = selectedOptionId;
     },
   },
 });
@@ -35,15 +42,16 @@ export const {
   getProduct,
   getProductSuccess,
   getProductFailure,
+  setAttributeOption,
 } = productSlice.actions;
 //////////////////////////////////////////////////////////////////////
-/// fetchProduct thunk ///
+/// thunks ///
 export const fetchProduct = (productId) => {
   return async (dispatch) => {
     dispatch(getProduct());
     try {
       const data = await fetchProductAPI(productId);
-      dispatch(getProductSuccess(data.product));
+      dispatch(getProductSuccess({...data.product, productId}));
     } catch (error) {
       dispatch(getProductFailure());
     }

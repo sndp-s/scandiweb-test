@@ -5,20 +5,20 @@ import React, { Component } from "react";
 import Title from "../../components/Title";
 import CartList from "../../components/CartList";
 
-///////// pages /////////
-import Layout from "../Layout";
+///////// provider /////////
+import CartProvider from "../../components/CartProvider";
 
 class CartPage extends Component {
   render() {
     return (
-      <Layout>
-        <main className="container">
-          <Title text="CART" pageStyle="CartPage">
-            CART
-          </Title>
+      <main className="container">
+        <Title text="CART" pageStyle="CartPage">
+          CART
+        </Title>
+        <CartProvider>
           <CartList pageStyle="CartPage" />
-        </main>
-      </Layout>
+        </CartProvider>
+      </main>
     );
   }
 }

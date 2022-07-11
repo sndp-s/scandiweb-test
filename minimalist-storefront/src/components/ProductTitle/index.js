@@ -1,9 +1,10 @@
+/////////  libs /////////
 import React, { Component } from "react";
 
-// components
-import { Brand, Item } from "./ProductInfoTitle.styles";
+///////// components /////////
+import { Brand, Item } from "./ProductTitle.styles";
 
-class ProductInfoTitle extends Component {
+class ProductTitle extends Component {
   render() {
     const { pageStyle, name, brand } = this.props;
     return (
@@ -15,4 +16,4 @@ class ProductInfoTitle extends Component {
   }
 }
 
-export default ProductInfoTitle;
+export default ProductTitle;

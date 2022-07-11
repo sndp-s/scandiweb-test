@@ -63,18 +63,47 @@ const BaseStyle_Item = css`
   background: #ffffff;
   padding: 0 10px;
   margin-right: 12px;
+  cursor: pointer;
+
   /* text rules */
   font-size: 16px;
   line-height: 45px;
   color: #1d1f22;
   text-align: center;
-
   :hover {
     background: #1d1f22;
     border: 1px solid #1d1f22;
     color: #ffffff;
   }
+
+  ${({ type, value, isSelected }) => {
+    if (type === "swatch") {
+      return css`
+        background: ${value};
+        width: 32px;
+        height: 32px;
+        :hover {
+          background: ${value};
+          box-shadow: 0 0 0 1px #fff, 0 0 0 2px #5ece7b;
+        }
+        ${isSelected &&
+          css`
+            box-shadow: 0 0 0 1px #fff, 0 0 0 2px #5ece7b;
+          `}
+      `;
+    } else {
+      return (
+        isSelected &&
+        css`
+          background: #1d1f22;
+          border: 1px solid #1d1f22;
+          color: #ffffff;
+        `
+      );
+    }
+  }}
 `;
+
 const CartDropdownStyle_Item = css`
   ${BaseStyle_Item}
   /* box rules */
@@ -83,11 +112,13 @@ const CartDropdownStyle_Item = css`
   width: 24px;
   height: 24px;
   margin-right: 8px;
+  padding: 0;
   /* text rules */
   font-size: 14px;
   line-height: 24px;
   color: #1d1f22;
 `;
+
 export const Item = styled.li`
   ${({ pageStyle }) => {
     switch (pageStyle) {

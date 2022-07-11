@@ -10,11 +10,11 @@ export const ImgList = styled.ul`
   display: flex;
   flex-direction: column;
   margin-right: 40px;
+  /* overflow-y: scroll; */
 `;
 
 export const ListItem = styled.li`
   width: 80px;
-  height: 80px;
   margin-bottom: 32px;
 `;
 

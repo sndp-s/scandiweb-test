@@ -6,16 +6,6 @@ export const Wrapper = styled.div`
   width: 100%;
 `;
 
-export const Button = styled.button`
-  width: 292px;
-  height: 52px;
-  background: #5ece7b;
-  color: #fff;
-  line-height: 54px;
-  border: none;
-  margin-bottom: 40px;
-`;
-
 export const Description = styled.div`
   font-weight: 400;
   font-size: 16px;
