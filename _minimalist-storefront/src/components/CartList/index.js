@@ -23,8 +23,6 @@ import LoadingSpinner from "../LoadingSpinner";
 
 /// actions ///
 import { loadCartItems } from "../../slices/cartSlice";
-import { render } from "@testing-library/react";
-import { toHaveDisplayValue } from "@testing-library/jest-dom/dist/matchers";
 
 class CartList extends Component {
   constructor(props) {
@@ -38,68 +36,63 @@ class CartList extends Component {
     this.props.loadCartItems();
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    // if(this.props.renderItems.length !== 0){
-    // if (this.props.renderItems.id) {
-    // console.log("component now exists")
-    // }
-    // }
-    console.log(this.props);
-  }
+  componentDidUpdate(prevProps, prevState) {}
 
   render() {
-    const { pageStyle, renderItems, loading, hasErrors } = this.props;
-    if (renderItems.length === 0) return <h1>The Cart is Empty!</h1>;
-    else {
-      return (
-        <>Cart Items</>
-        // <Wrapper pageStyle={pageStyle}>
-        //   <List pageStyle={pageStyle}>
-        //     {renderItems.map((renderItem) => {
-        //       return (
-        //         <Item pageStyle={pageStyle}>
-        //           <div>
-        //             <ProductTitle
-        //               pageStyle={pageStyle}
-        //               name={renderItem.name}
-        //               brand={renderItem.brand}
-        //             />
-        //             {/* {console.log(renderItem)} */}
-        //             {/* <ProductPrice pageStyle={pageStyle} price={price} /> */}
-        //             <ProductAttributes
-        //               pageStyle={pageStyle}
-        //               attributes={renderItems.attributes}
-        //             />
-        //           </div>
-        //           <ItemRightWrapper>
-        //             <div>
-        //               <ProductCounter pageStyle={pageStyle}>
-        //                 <CounterButton pageStyle={pageStyle}>+</CounterButton>
-        //                 <CounterLabel pageStyle={pageStyle}>2</CounterLabel>
-        //                 <CounterButton pageStyle={pageStyle}>-</CounterButton>
-        //               </ProductCounter>
-        //             </div>
-        //             {/* <Carousel pageStyle={pageStyle} gallery={gallery} /> */}
-        //           </ItemRightWrapper>
-        //         </Item>
-        //       );
-        //     })}
-        //   </List>
+    console.log(this.props.renderItems)
+    return <>cart list</>;
+    // const { pageStyle, renderItems, loading, hasErrors } = this.props;
+    // if (renderItems.length === 0) return <h1>The Cart is Empty!</h1>;
+    // else {
+    // return (
+    // <>Cart Items</>
+    // <Wrapper pageStyle={pageStyle}>
+    //   <List pageStyle={pageStyle}>
+    //     {renderItems.map((renderItem) => {
+    //       return (
+    //         <Item pageStyle={pageStyle}>
+    //           <div>
+    //             <ProductTitle
+    //               pageStyle={pageStyle}
+    //               name={renderItem.name}
+    //               brand={renderItem.brand}
+    //             />
+    //             {/* {console.log(renderItem)} */}
+    //             {/* <ProductPrice pageStyle={pageStyle} price={price} /> */}
+    //             <ProductAttributes
+    //               pageStyle={pageStyle}
+    //               attributes={renderItems.attributes}
+    //             />
+    //           </div>
+    //           <ItemRightWrapper>
+    //             <div>
+    //               <ProductCounter pageStyle={pageStyle}>
+    //                 <CounterButton pageStyle={pageStyle}>+</CounterButton>
+    //                 <CounterLabel pageStyle={pageStyle}>2</CounterLabel>
+    //                 <CounterButton pageStyle={pageStyle}>-</CounterButton>
+    //               </ProductCounter>
+    //             </div>
+    //             {/* <Carousel pageStyle={pageStyle} gallery={gallery} /> */}
+    //           </ItemRightWrapper>
+    //         </Item>
+    //       );
+    //     })}
+    //   </List>
 
-        //   <OrderWrapper>
-        //     <OrderCalcGrid>
-        //       <span className="label">Tax 21%:</span>
-        //       <span className="value">$42.00</span>
-        //       <span className="label">Quantity:</span>
-        //       <span className="value">3</span>
-        //       <span className="label">Total:</span>
-        //       <span className="value">$200.00</span>
-        //     </OrderCalcGrid>
-        //     <OrderButton>Order</OrderButton>
-        //   </OrderWrapper>
-        // </Wrapper>
-      );
-    }
+    //   <OrderWrapper>
+    //     <OrderCalcGrid>
+    //       <span className="label">Tax 21%:</span>
+    //       <span className="value">$42.00</span>
+    //       <span className="label">Quantity:</span>
+    //       <span className="value">3</span>
+    //       <span className="label">Total:</span>
+    //       <span className="value">$200.00</span>
+    //     </OrderCalcGrid>
+    //     <OrderButton>Order</OrderButton>
+    //   </OrderWrapper>
+    // </Wrapper>
+    // );
+    // }
   }
 }
 
@@ -112,7 +105,7 @@ const mapStateToProps = (state) => {
   cartItems.forEach((cartItem, index) => {
     if (index === 0) {
       const newRenderItem = {
-        ...products[cartItems[0].id],
+        product: products[cartItems[0].id],
         count: 1,
         selectedAttributes: cartItems[0].attributes,
       };
@@ -120,14 +113,14 @@ const mapStateToProps = (state) => {
     } else {
       const icartItemInRenderItems = renderItems.findIndex((renderItem) => {
         return (
-          renderItem.id === cartItem.id &&
+          renderItem.product.id === cartItem.id &&
           JSON.stringify(renderItem.selectedAttributes) ===
             JSON.stringify(cartItem.attributes)
         );
       });
       if (icartItemInRenderItems === -1) {
         const newRenderItem = {
-          ...products[cartItems[0].id],
+          product: products[cartItems[0].id],
           count: 1,
           selectedAttributes: cartItem.attributes,
         };
@@ -139,6 +132,7 @@ const mapStateToProps = (state) => {
   });
 
   return { renderItems };
+  return {};
 };
 
 const mapDispatchToProps = (dispatch) => {
