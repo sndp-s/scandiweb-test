@@ -1,14 +1,15 @@
-//////////////////////////////////////////////////////////////////////
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchCartItems } from "../API/cart";
-//////////////////////////////////////////////////////////////////////
+
 const initialState = {
   cartItems: [],
   products: {},
+  // renderItems: [],
   temp: { product: {} },
   loading: false,
   hasErrors: false,
 };
+
 const cartSlice = createSlice({
   name: "cart",
   initialState,
@@ -44,9 +45,13 @@ const cartSlice = createSlice({
     addToCart: (state) => {
       state.cartItems.push(state.temp.product);
     },
+
+    // updateRenderItems: (state, { payload }) => {
+    //   state.renderItems = payload;
+    // },
   },
 });
-//////////////////////////////////////////////////////////////////////
+
 export const {
   getCartItems,
   loadCartProducts,
@@ -55,12 +60,14 @@ export const {
   holdItem,
   setOption,
   addToCart,
+  // updateRenderItems,
 } = cartSlice.actions;
-//////////////////////////////////////////////////////////////////////
+
 export const loadCartItems = (state) => {
   return async (dispatch, getState) => {
     dispatch(loadCartProducts());
-    let { cartItems, products } = getState().cart;
+    let { cartItems, products } = await getState().cart;
+
     const newProducts = { ...products };
     for await (const cartItem of cartItems) {
       if (products[cartItem.id] === undefined) {
@@ -68,31 +75,54 @@ export const loadCartItems = (state) => {
         newProducts[cartItem.id] = product;
       }
     }
-    dispatch(loadCartProductsSuccess(newProducts));
-
-    // for await (const [index, cartItem] of cartItems.entries()) {
-    //   if (products[cartItem.id] === undefined) {
-    //     const product = await fetchCartItems(cartItem.id);
-    //     newProducts[cartItem.id] = {};
-    //     newProducts[cartItem.id].product = product;
-    //     newProducts[cartItem.id].count = 1;
-    //     newProducts[cartItem.id].selectedAttributes =
-    //       cartItems[index].attributes;
-    //   } else if (
-    //     products[cartItem.id].attributes === cartItems[index].attributes
-    //   ) {
-    //     newProducts[cartItem.id].count += 1;
-    //   } else {
-    //     const product = await fetchCartItems(cartItem.id);
-    //     newProducts[cartItem.id] = {};
-    //     newProducts[cartItem.id].product = product;
-    //     newProducts[cartItem.id].count = 1;
-    //     newProducts[cartItem.id].selectedAttributes =
-    //       cartItems[index].attributes;
-    //   }
-    // }
+    await dispatch(loadCartProductsSuccess(newProducts));
+    // await dispatch(filterRenderItems());
   };
 };
+
+// export const filterRenderItems = (state) => {
+//   return async (dispatch, getState) => {
+//     let { cartItems, products, renderItems } = await getState().cart;
+//     // console.log("cartItems", cartItems);
+//     // console.log("products", products);
+
+//     let newRenderItems = [];
+//     cartItems.forEach((cartItem, index) => {
+//       const icartItemInRenderItems = renderItems.findIndex(
+//         (renderItem, index) => {
+//           return (
+//             renderItem.product.id === cartItem.id &&
+//             JSON.stringify(renderItem.selectedAttributes) ===
+//               JSON.stringify(cartItem.attributes)
+//           );
+//         }
+//       );
+//       if (icartItemInRenderItems === -1) {
+//         let temp = [
+//           ...newRenderItems,
+//           {
+//             product: products[cartItem.id],
+//             selectedAttributes: cartItem.attributes,
+//             count: 1,
+//           },
+//         ];
+//         newRenderItems = temp;
+//         // newRenderItems.push({
+//         //   product: products[cartItem.id],
+//         //   selectedAttributes: cartItem.attributes,
+//         //   count: 1,
+//         // });
+//       } else {
+//         let renderItemWithUpdatedCount = {
+//           ...renderItems[icartItemInRenderItems],
+//         };
+//         renderItemWithUpdatedCount.count += 1;
+//         newRenderItems = [...renderItems];
+//         newRenderItems[icartItemInRenderItems] = renderItemWithUpdatedCount;
+//       }
+//       dispatch(updateRenderItems(newRenderItems));
+//     });
+//   };
+// };
 //////////////////////////////////////////////////////////////////////
 export default cartSlice.reducer;
-//////////////////////////////////////////////////////////////////////

@@ -23,78 +23,88 @@ import LoadingSpinner from "../LoadingSpinner";
 
 /// actions ///
 import { loadCartItems } from "../../slices/cartSlice";
-import { renderIntoDocument } from "react-dom/test-utils";
 
 class CartList extends Component {
   constructor(props) {
     super(props);
-    // this.updateRenderItems = this.updateRenderItems.bind(this);
+    this.updateRenderItems = this.updateRenderItems.bind(this);
     this.state = {
+      cartItems: [],
+      products: {},
       renderItems: [],
     };
   }
 
-//   updateRenderItems = () => {
-//     // console.log("updateRenderItems called");
-//     const { cartItems, products } = this.props.cart;
-//     const { renderItems } = this.state;
+  updateRenderItems = () => {
+    const { cartItems, products } = this.props.cart;
+    let renderItems = [];
 
-//     const newRenderItems = [];
-//     cartItems.forEach((cartItem, index) => {
-//       const icartItemInRenderItems = renderItems.findIndex((renderItem) => {
-//         return (
-//           renderItem.product.id === cartItem.id &&
-//           JSON.stringify(renderItem.selectedAttributes) ===
-//             JSON.stringify(cartItem.attributes)
-//         );
-//       });
-//       if (icartItemInRenderItems === -1) {
-//         newRenderItems.push({
-//           product: products[cartItem.id],
-//           selectedAttributes: cartItem.attributes,
-//           count: 1,
-//         });
-//       } else {
-//         const updatedCountObject = renderItems[icartItemInRenderItems];
-//         updatedCountObject.count += 1;
-//         newRenderItems = [...renderItems];
-//         newRenderItems[icartItemInRenderItems] = updatedCountObject;
-//         this.setState({
-//           renderItems: newRenderItems,
-//         });
-//       }
-//     });
-//   };
+    if (cartItems.length === 0) return { renderItems };
 
-    componentDidMount = async () => {
-      await this.props.loadCartItems();
-    //   this.updateRenderItems();
-    };
+    cartItems.forEach((cartItem, index) => {
+      if (index === 0) {
+        const newRenderItem = {
+          product: products[cartItems[0].id],
+          count: 1,
+          selectedAttributes: cartItems[0].attributes,
+        };
+        renderItems.push(newRenderItem);
+      } else {
+        const icartItemInRenderItems = renderItems.findIndex((renderItem) => {
+          return (
+            renderItem.product.id === cartItem.id &&
+            JSON.stringify(renderItem.selectedAttributes) ===
+              JSON.stringify(cartItem.attributes)
+          );
+        });
+        if (icartItemInRenderItems === -1) {
+          const newRenderItem = {
+            product: products[cartItems[0].id],
+            count: 1,
+            selectedAttributes: cartItem.attributes,
+          };
+          renderItems.push(newRenderItem);
+        } else {
+          renderItems[icartItemInRenderItems].count += 1;
+        }
+      }
+    });
 
-  //   async componentDidUpdate(prevProps, prevState) {
-  //     // fetch products on changes in cart item quantity
-  //     const { cartItems, products } = this.props.cart;
-  //     if (cartItems.length > prevProps.cart.cartItems.length) {
-  //       await this.props.loadCartItems();
-  //       this.updateRenderItems();
-  //     }
+    this.setState({
+      ...this.state,
+      renderItems: renderItems,
+    });
+  };
 
-  //     // if (
-  //     //   JSON.stringify(prevProps.cart.products) !==
-  //     //   JSON.stringify(products)
-  //     // ) {
-  //     //   this.updateRenderItems();
-  //     // }
-  //   }
+  componentDidMount() {
+    this.props.loadCartItems();
+    const { cartItems, products } = this.props.cart;
+    this.setState({
+      ...this.state,
+      cartItems: cartItems,
+      products: products,
+    });
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const currentCart = this.props.cart;
+
+    if (
+      JSON.stringify(currentCart.products) !==
+        JSON.stringify(currentCart.products) ||
+      currentCart.cartItems.length !== prevState.cartItems.length
+    ) {
+      this.props.loadCartItems();
+      this.updateRenderItems();
+      
+    }
+
+  }
 
   render() {
-    const { cartItems, products } = this.props.cart;
-
-    // console.log("state ", this.state);
-    // console.log("cartItems", cartItems);
-    // console.log("products", products);
-    // console.log("============================================================================");
-
+    console.log(this.props);
+    // const { renderItems } = this.state;
+    // const { pageStyle } = this.props;
     return (
       <>cart list</>
       // <Wrapper pageStyle={pageStyle}>
