@@ -23,7 +23,6 @@ import LoadingSpinner from "../LoadingSpinner";
 
 /// actions ///
 import { loadCartItems } from "../../slices/cartSlice";
-import { renderIntoDocument } from "react-dom/test-utils";
 
 class CartList extends Component {
   constructor(props) {
@@ -34,66 +33,60 @@ class CartList extends Component {
     };
   }
 
-//   updateRenderItems = () => {
-//     // console.log("updateRenderItems called");
-//     const { cartItems, products } = this.props.cart;
-//     const { renderItems } = this.state;
-
-//     const newRenderItems = [];
-//     cartItems.forEach((cartItem, index) => {
-//       const icartItemInRenderItems = renderItems.findIndex((renderItem) => {
-//         return (
-//           renderItem.product.id === cartItem.id &&
-//           JSON.stringify(renderItem.selectedAttributes) ===
-//             JSON.stringify(cartItem.attributes)
-//         );
-//       });
-//       if (icartItemInRenderItems === -1) {
-//         newRenderItems.push({
-//           product: products[cartItem.id],
-//           selectedAttributes: cartItem.attributes,
-//           count: 1,
-//         });
-//       } else {
-//         const updatedCountObject = renderItems[icartItemInRenderItems];
-//         updatedCountObject.count += 1;
-//         newRenderItems = [...renderItems];
-//         newRenderItems[icartItemInRenderItems] = updatedCountObject;
-//         this.setState({
-//           renderItems: newRenderItems,
-//         });
-//       }
-//     });
-//   };
-
-    componentDidMount = async () => {
-      await this.props.loadCartItems();
+  componentDidMount = async () => {
+    await this.props.loadCartItems();
     //   this.updateRenderItems();
-    };
+  };
 
-  //   async componentDidUpdate(prevProps, prevState) {
-  //     // fetch products on changes in cart item quantity
-  //     const { cartItems, products } = this.props.cart;
-  //     if (cartItems.length > prevProps.cart.cartItems.length) {
-  //       await this.props.loadCartItems();
-  //       this.updateRenderItems();
-  //     }
+  // when component re-renders
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.cart.products !== this.props.cart.products) {
+      // calculate renderItems and update local state
+      const { cartItems, products } = this.props.cart;
 
-  //     // if (
-  //     //   JSON.stringify(prevProps.cart.products) !==
-  //     //   JSON.stringify(products)
-  //     // ) {
-  //     //   this.updateRenderItems();
-  //     // }
-  //   }
+      cartItems.forEach((cartItem, index) => {
+        if (index === 0) {
+          this.setState({
+            renderItems: [
+              {
+                count: 1,
+                selectedAttributes: cartItem.attributes,
+                product: products[cartItem.id],
+              },
+            ],
+          });
+        } else {
+          const iCartItemInRenderItems = this.state.renderItems.find(
+            (renderItem) => renderItem.id === cartItem.id
+          );
+          if (
+            iCartItemInRenderItems !== -1 &&
+            cartItem.attributes ===
+              this.state.renderItems[iCartItemInRenderItems].selectedAttributes
+          ) {
+            let temp = this.state.renderItems;
+            temp[iCartItemInRenderItems].count += 1;
+            this.setState(temp);
+          } else {
+            this.setState({
+              renderItems: [
+                ...this.state.renderItems,
+                {
+                  count: 1,
+                  selectedAttributes: cartItem.attributes,
+                  product: products[cartItem.id],
+                },
+              ],
+            });
+          }
+        }
+      });
+    }
+    console.log(this.state.renderItems);
+  }
 
   render() {
     const { cartItems, products } = this.props.cart;
-
-    // console.log("state ", this.state);
-    // console.log("cartItems", cartItems);
-    // console.log("products", products);
-    // console.log("============================================================================");
 
     return (
       <>cart list</>
